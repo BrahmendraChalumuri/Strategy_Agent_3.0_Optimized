@@ -149,7 +149,7 @@ class HybridChatbotSystem:
         
         -- Create customer_catalogue table
         CREATE TABLE customer_catalogue (
-            CatalogueID SERIAL PRIMARY KEY,
+            CatalogueID VARCHAR(20) PRIMARY KEY,
             CustomerID VARCHAR(10) REFERENCES customers(CustomerID),
             ProductName VARCHAR(200) NOT NULL,
             Category VARCHAR(50),
@@ -260,7 +260,6 @@ class HybridChatbotSystem:
             df.columns = df.columns.str.replace('"', '').str.lower()
             
             # Add additional columns for our schema
-            df['catalogueid'] = range(1, len(df) + 1)
             df['calories'] = np.random.randint(100, 500, len(df))  # Mock calories data
             df['quantityrequired'] = df.get('quantityrequired', 1)
             
@@ -294,13 +293,13 @@ class HybridChatbotSystem:
             logger.info("📊 Generating sample sales data...")
             
             # Get customer and product data
-            customers_df = pd.read_sql("SELECT CustomerID FROM customers", self.db_engine)
-            products_df = pd.read_sql("SELECT ProductID, Price FROM products", self.db_engine)
+            customers_df = pd.read_sql("SELECT customerid FROM customers", self.db_engine)
+            products_df = pd.read_sql("SELECT productid, price FROM products", self.db_engine)
             
             # Generate sample sales data
             sales_data = []
             
-            for customer_id in customers_df['CustomerID']:
+            for customer_id in customers_df['customerid']:
                 # Generate 10-50 sales per customer
                 num_sales = np.random.randint(10, 51)
                 
@@ -314,20 +313,20 @@ class HybridChatbotSystem:
                     )[np.random.randint(0, 1000)]
                     
                     quantity = np.random.randint(1, 100)
-                    unit_price = float(product['Price'])
+                    unit_price = float(product['price'])
                     total_amount = quantity * unit_price
                     
                     sales_data.append({
-                        'CustomerID': customer_id,
-                        'StoreID': f'ST{np.random.randint(1, 100):03d}',
-                        'ProductID': int(product['ProductID']),
-                        'PlantID': f'PL{np.random.randint(1, 10):02d}',
-                        'Quantity': quantity,
-                        'UnitPrice': unit_price,
-                        'TotalAmount': total_amount,
-                        'SaleDate': sale_date,
-                        'DeliveryDate': sale_date + pd.Timedelta(days=np.random.randint(1, 7)),
-                        'Status': np.random.choice(['Completed', 'Pending', 'Shipped'])
+                        'customerid': customer_id,
+                        'storeid': f'ST{np.random.randint(1, 100):03d}',
+                        'productid': int(product['productid']),
+                        'plantid': f'PL{np.random.randint(1, 10):02d}',
+                        'quantity': quantity,
+                        'unitprice': unit_price,
+                        'totalamount': total_amount,
+                        'saledate': sale_date,
+                        'deliverydate': sale_date + pd.Timedelta(days=np.random.randint(1, 7)),
+                        'status': np.random.choice(['Completed', 'Pending', 'Shipped'])
                     })
             
             # Create DataFrame and insert
