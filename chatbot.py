@@ -217,23 +217,11 @@ class HybridChatbotSystem:
         try:
             df = pd.read_csv('data/customer.csv')
             
-            # Debug: Print original column names
-            logger.info(f"Original column names: {list(df.columns)}")
-            
-            # Clean column names (remove all quotes if present)
-            df.columns = df.columns.str.replace('"', '')
-            
-            # Debug: Print cleaned column names
-            logger.info(f"Cleaned column names: {list(df.columns)}")
+            # Clean column names (remove all quotes if present and convert to lowercase)
+            df.columns = df.columns.str.replace('"', '').str.lower()
             
             # Clean and prepare data
-            df['TotalStores'] = pd.to_numeric(df['TotalStores'], errors='coerce').fillna(0).astype(int)
-            
-            # Debug: Check what columns exist in the database table
-            with self.db_engine.connect() as conn:
-                result = conn.execute(text("SELECT column_name FROM information_schema.columns WHERE table_name = 'customers'"))
-                db_columns = [row[0] for row in result]
-                logger.info(f"Database table columns: {db_columns}")
+            df['totalstores'] = pd.to_numeric(df['totalstores'], errors='coerce').fillna(0).astype(int)
             
             # Insert into database
             df.to_sql('customers', self.db_engine, if_exists='append', index=False)
@@ -248,12 +236,12 @@ class HybridChatbotSystem:
         try:
             df = pd.read_csv('data/products.csv')
             
-            # Clean column names (remove all quotes if present)
-            df.columns = df.columns.str.replace('"', '')
+            # Clean column names (remove all quotes if present and convert to lowercase)
+            df.columns = df.columns.str.replace('"', '').str.lower()
             
             # Clean and prepare data
-            df['Price'] = pd.to_numeric(df['Price'], errors='coerce').fillna(0.0)
-            df['ProductID'] = pd.to_numeric(df['ProductID'], errors='coerce').fillna(0).astype(int)
+            df['price'] = pd.to_numeric(df['price'], errors='coerce').fillna(0.0)
+            df['productid'] = pd.to_numeric(df['productid'], errors='coerce').fillna(0).astype(int)
             
             # Insert into database
             df.to_sql('products', self.db_engine, if_exists='append', index=False)
@@ -268,28 +256,28 @@ class HybridChatbotSystem:
         try:
             df = pd.read_csv('data/customer_catalogue_enhanced.csv')
             
-            # Clean column names (remove all quotes if present)
-            df.columns = df.columns.str.replace('"', '')
+            # Clean column names (remove all quotes if present and convert to lowercase)
+            df.columns = df.columns.str.replace('"', '').str.lower()
             
             # Add additional columns for our schema
-            df['CatalogueID'] = range(1, len(df) + 1)
-            df['Calories'] = np.random.randint(100, 500, len(df))  # Mock calories data
-            df['QuantityRequired'] = df.get('QuantityRequired', 1)
+            df['catalogueid'] = range(1, len(df) + 1)
+            df['calories'] = np.random.randint(100, 500, len(df))  # Mock calories data
+            df['quantityrequired'] = df.get('quantityrequired', 1)
             
             # Rename columns to match our schema
             df = df.rename(columns={
-                'CustomerCatalogueItemID': 'CatalogueID'
+                'customercatalogueitemid': 'catalogueid'
             })
             
             # Select and reorder columns
             catalogue_columns = [
-                'CatalogueID', 'CustomerID', 'ProductName', 'Product Category',
-                'Description', 'Ingredients', 'Calories', 'QuantityRequired'
+                'catalogueid', 'customerid', 'productname', 'product category',
+                'description', 'ingredients', 'calories', 'quantityrequired'
             ]
             
             df_catalogue = df[catalogue_columns].copy()
             df_catalogue = df_catalogue.rename(columns={
-                'Product Category': 'Category'
+                'product category': 'category'
             })
             
             # Insert into database
