@@ -217,8 +217,8 @@ class HybridChatbotSystem:
         try:
             df = pd.read_csv('data/customer.csv')
             
-            # Clean column names (remove quotes if present)
-            df.columns = df.columns.str.strip('"')
+            # Clean column names (remove all quotes if present)
+            df.columns = df.columns.str.replace('"', '')
             
             # Clean and prepare data
             df['TotalStores'] = pd.to_numeric(df['TotalStores'], errors='coerce').fillna(0).astype(int)
@@ -236,8 +236,8 @@ class HybridChatbotSystem:
         try:
             df = pd.read_csv('data/products.csv')
             
-            # Clean column names (remove quotes if present)
-            df.columns = df.columns.str.strip('"')
+            # Clean column names (remove all quotes if present)
+            df.columns = df.columns.str.replace('"', '')
             
             # Clean and prepare data
             df['Price'] = pd.to_numeric(df['Price'], errors='coerce').fillna(0.0)
@@ -256,8 +256,8 @@ class HybridChatbotSystem:
         try:
             df = pd.read_csv('data/customer_catalogue_enhanced.csv')
             
-            # Clean column names (remove quotes if present)
-            df.columns = df.columns.str.strip('"')
+            # Clean column names (remove all quotes if present)
+            df.columns = df.columns.str.replace('"', '')
             
             # Add additional columns for our schema
             df['CatalogueID'] = range(1, len(df) + 1)
