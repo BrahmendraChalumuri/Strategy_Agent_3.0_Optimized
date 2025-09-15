@@ -52,7 +52,7 @@ import glob
 import json
 
 # Load environment variables
-load_dotenv()
+load_dotenv('chatbot.env')
 
 # Configure logging
 logging.basicConfig(
