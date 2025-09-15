@@ -1,0 +1,4 @@
+"CustomerID","CustomerName","CustomerType","Country","Region","TotalStores"
+"C001","Starbucks","Licensed","International","Middle East","99"
+"C002","McDonald's","Corporate","United States","National","4"
+"C003","Walmart","Corporate","United States","National","99"
