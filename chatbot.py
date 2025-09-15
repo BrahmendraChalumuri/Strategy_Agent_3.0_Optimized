@@ -52,7 +52,7 @@ import glob
 import json
 
 # Load environment variables
-load_dotenv()
+load_dotenv('chatbot.env')
 
 # Configure logging
 logging.basicConfig(
@@ -149,7 +149,7 @@ class HybridChatbotSystem:
         
         -- Create customer_catalogue table
         CREATE TABLE customer_catalogue (
-            CatalogueID SERIAL PRIMARY KEY,
+            CatalogueID VARCHAR(20) PRIMARY KEY,
             CustomerID VARCHAR(10) REFERENCES customers(CustomerID),
             ProductName VARCHAR(200) NOT NULL,
             Category VARCHAR(50),
@@ -260,7 +260,6 @@ class HybridChatbotSystem:
             df.columns = df.columns.str.replace('"', '').str.lower()
             
             # Add additional columns for our schema
-            df['catalogueid'] = range(1, len(df) + 1)
             df['calories'] = np.random.randint(100, 500, len(df))  # Mock calories data
             df['quantityrequired'] = df.get('quantityrequired', 1)
             
