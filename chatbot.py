@@ -217,8 +217,14 @@ class HybridChatbotSystem:
         try:
             df = pd.read_csv('data/customer.csv')
             
+            # Debug: Print original column names
+            logger.info(f"Original column names: {list(df.columns)}")
+            
             # Clean column names (remove all quotes if present)
             df.columns = df.columns.str.replace('"', '')
+            
+            # Debug: Print cleaned column names
+            logger.info(f"Cleaned column names: {list(df.columns)}")
             
             # Clean and prepare data
             df['TotalStores'] = pd.to_numeric(df['TotalStores'], errors='coerce').fillna(0).astype(int)
