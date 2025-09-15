@@ -371,100 +371,113 @@ class HybridChatbotSystem:
         try:
             logger.info("📚 Setting up Weaviate vector store for PDF reports...")
             
-            # Initialize Weaviate client
-            client_kwargs = {
-                "url": self.weaviate_url,
-            }
-            
-            # Add API key if provided (for Weaviate Cloud Services)
-            if self.weaviate_api_key:
-                client_kwargs["auth_client_secret"] = weaviate.AuthApiKey(api_key=self.weaviate_api_key)
-            
-            weaviate_client = weaviate.Client(**client_kwargs)
-            
-            # Test connection
+            # Try to initialize Weaviate client (v4 API)
             try:
-                weaviate_client.is_ready()
+                if self.weaviate_api_key:
+                    # For Weaviate Cloud Services
+                    weaviate_client = weaviate.connect_to_weaviate_cloud(
+                        cluster_url=self.weaviate_url,
+                        auth_credentials=weaviate.AuthApiKey(api_key=self.weaviate_api_key)
+                    )
+                else:
+                    # For local Weaviate instance
+                    weaviate_client = weaviate.connect_to_local(
+                        host="localhost",
+                        port=8080
+                    )
+                
+                # Test connection
+                weaviate_client.get_meta()
                 logger.info("✅ Connected to Weaviate successfully")
+                
             except Exception as e:
-                logger.error(f"❌ Failed to connect to Weaviate: {str(e)}")
-                raise
-            
-            # Initialize embeddings
-            embeddings = OpenAIEmbeddings(openai_api_key=self.openai_api_key)
-            
-            # Load PDF reports
-            pdf_files = glob.glob("reports/*.pdf")
-            
-            if not pdf_files:
-                logger.warning("⚠️ No PDF reports found in reports/ directory")
-                # Create empty vector store with dummy document
-                dummy_doc = Document(page_content="No PDF reports available", metadata={"source": "empty"})
-                self.vector_store = Weaviate.from_documents(
-                    [dummy_doc], 
-                    embeddings, 
-                    client=weaviate_client,
-                    index_name="PDFReports"
-                )
+                logger.warning(f"⚠️ Weaviate connection failed: {str(e)}")
+                logger.info("📝 Continuing without vector store - chatbot will work with database queries only")
+                self.vector_store = None
                 return
             
-            logger.info(f"📄 Found {len(pdf_files)} PDF reports")
-            
-            # Load and split documents
-            documents = []
-            for pdf_file in pdf_files:
-                try:
-                    loader = PyPDFLoader(pdf_file)
-                    pages = loader.load()
-                    
-                    # Add metadata
-                    for page in pages:
-                        page.metadata['source'] = pdf_file
-                        page.metadata['filename'] = os.path.basename(pdf_file)
-                        page.metadata['file_type'] = 'pdf_report'
-                        page.metadata['ingestion_date'] = datetime.now().isoformat()
-                    
-                    documents.extend(pages)
-                    logger.info(f"✅ Loaded {len(pages)} pages from {os.path.basename(pdf_file)}")
-                    
-                except Exception as e:
-                    logger.warning(f"⚠️ Failed to load {pdf_file}: {str(e)}")
-                    continue
-            
-            if not documents:
-                logger.warning("⚠️ No documents loaded, creating empty vector store")
-                dummy_doc = Document(page_content="No PDF reports available", metadata={"source": "empty"})
+            # Initialize embeddings and create vector store
+            try:
+                embeddings = OpenAIEmbeddings(openai_api_key=self.openai_api_key)
+                
+                # Load PDF reports
+                pdf_files = glob.glob("reports/*.pdf")
+                
+                if not pdf_files:
+                    logger.warning("⚠️ No PDF reports found in reports/ directory")
+                    # Create empty vector store with dummy document
+                    dummy_doc = Document(page_content="No PDF reports available", metadata={"source": "empty"})
+                    self.vector_store = Weaviate.from_documents(
+                        [dummy_doc], 
+                        embeddings, 
+                        client=weaviate_client,
+                        index_name="PDFReports"
+                    )
+                    return
+                
+                logger.info(f"📄 Found {len(pdf_files)} PDF reports")
+                
+                # Load and split documents
+                documents = []
+                for pdf_file in pdf_files:
+                    try:
+                        loader = PyPDFLoader(pdf_file)
+                        pages = loader.load()
+                        
+                        # Add metadata
+                        for page in pages:
+                            page.metadata['source'] = pdf_file
+                            page.metadata['filename'] = os.path.basename(pdf_file)
+                            page.metadata['file_type'] = 'pdf_report'
+                            page.metadata['ingestion_date'] = datetime.now().isoformat()
+                        
+                        documents.extend(pages)
+                        logger.info(f"✅ Loaded {len(pages)} pages from {os.path.basename(pdf_file)}")
+                        
+                    except Exception as e:
+                        logger.warning(f"⚠️ Failed to load {pdf_file}: {str(e)}")
+                        continue
+                
+                if not documents:
+                    logger.warning("⚠️ No documents loaded, creating empty vector store")
+                    dummy_doc = Document(page_content="No PDF reports available", metadata={"source": "empty"})
+                    self.vector_store = Weaviate.from_documents(
+                        [dummy_doc], 
+                        embeddings, 
+                        client=weaviate_client,
+                        index_name="PDFReports"
+                    )
+                    return
+                
+                # Split documents
+                text_splitter = CharacterTextSplitter(
+                    chunk_size=1000,
+                    chunk_overlap=200
+                )
+                split_docs = text_splitter.split_documents(documents)
+                
+                logger.info(f"📝 Split into {len(split_docs)} chunks")
+                
+                # Create Weaviate vector store
                 self.vector_store = Weaviate.from_documents(
-                    [dummy_doc], 
+                    split_docs, 
                     embeddings, 
                     client=weaviate_client,
-                    index_name="PDFReports"
+                    index_name="PDFReports",
+                    text_key="content"
                 )
-                return
-            
-            # Split documents
-            text_splitter = CharacterTextSplitter(
-                chunk_size=1000,
-                chunk_overlap=200
-            )
-            split_docs = text_splitter.split_documents(documents)
-            
-            logger.info(f"📝 Split into {len(split_docs)} chunks")
-            
-            # Create Weaviate vector store
-            self.vector_store = Weaviate.from_documents(
-                split_docs, 
-                embeddings, 
-                client=weaviate_client,
-                index_name="PDFReports",
-                text_key="content"
-            )
-            
-            logger.info("✅ Weaviate vector store setup completed")
+                
+                logger.info("✅ Weaviate vector store setup completed")
+                
+            except Exception as e:
+                logger.warning(f"⚠️ Vector store creation failed: {str(e)}")
+                logger.info("📝 Continuing without vector store - chatbot will work with database queries only")
+                self.vector_store = None
             
         except Exception as e:
-            logger.error(f"❌ Weaviate vector store setup failed: {str(e)}")
-            raise
+            logger.warning(f"⚠️ Weaviate vector store setup failed: {str(e)}")
+            logger.info("📝 Continuing without vector store - chatbot will work with database queries only")
+            self.vector_store = None
     
     def _setup_agent(self):
         """Setup hybrid agent with database and PDF tools"""
@@ -478,10 +491,12 @@ class HybridChatbotSystem:
                 openai_api_key=self.openai_api_key
             )
             
-            # Create PDF retriever tool
-            pdf_retriever = self.vector_store.as_retriever(
-                search_kwargs={"k": 4}
-            )
+            # Create PDF retriever tool (if vector store is available)
+            pdf_retriever = None
+            if self.vector_store is not None:
+                pdf_retriever = self.vector_store.as_retriever(
+                    search_kwargs={"k": 4}
+                )
             
             # Create custom PDF tool
             class PDFReportTool(BaseTool):
@@ -497,6 +512,9 @@ class HybridChatbotSystem:
                 
                 def _run(self, query: str) -> str:
                     try:
+                        if pdf_retriever is None:
+                            return "PDF reports are not available. Vector store setup failed or no PDF reports found."
+                        
                         docs = pdf_retriever.get_relevant_documents(query)
                         if not docs:
                             return "No relevant information found in PDF reports."
