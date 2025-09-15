@@ -229,6 +229,12 @@ class HybridChatbotSystem:
             # Clean and prepare data
             df['TotalStores'] = pd.to_numeric(df['TotalStores'], errors='coerce').fillna(0).astype(int)
             
+            # Debug: Check what columns exist in the database table
+            with self.db_engine.connect() as conn:
+                result = conn.execute(text("SELECT column_name FROM information_schema.columns WHERE table_name = 'customers'"))
+                db_columns = [row[0] for row in result]
+                logger.info(f"Database table columns: {db_columns}")
+            
             # Insert into database
             df.to_sql('customers', self.db_engine, if_exists='append', index=False)
             logger.info(f"✅ Loaded {len(df)} customers")
