@@ -10,6 +10,7 @@ sqlalchemy>=2.0.0
 
 # Vector database and embeddings
 weaviate-client>=3.25.0
+faiss-cpu>=1.7.0
 
 # PDF processing
 pypdf>=3.0.0
@@ -20,3 +21,13 @@ numpy>=1.21.0
 
 # Environment and utilities
 python-dotenv>=0.19.0
+
+# FastAPI and API dependencies
+fastapi>=0.104.0
+uvicorn[standard]>=0.24.0
+pydantic>=2.5.0
+python-multipart>=0.0.6
+
+# HTTP client
+aiohttp>=3.9.0
+httpx>=0.25.0
