@@ -12,10 +12,9 @@ Usage:
 Endpoints:
     - POST /chat - Chat with the bot
     - GET /health - Health check
-    - GET /customers - List customers
-    - GET /products - List products
-    - GET /recommendations/{customer_id} - Get recommendations
     - POST /initialize - Initialize system
+    - GET /status - Get system status
+    - GET /search - Search documents in vector store
 """
 
 import os
@@ -83,24 +82,6 @@ class HealthResponse(BaseModel):
     vector_store_connected: bool = Field(..., description="Vector store connection status")
     chatbot_ready: bool = Field(..., description="Chatbot initialization status")
 
-class CustomerResponse(BaseModel):
-    customer_id: str
-    customer_name: str
-    customer_type: str
-    country: str
-    region: str
-    total_stores: int
-
-class ProductResponse(BaseModel):
-    product_id: int
-    name: str
-    category: str
-    subcategory: str
-    price: float
-    tags: str
-
-class RecommendationRequest(BaseModel):
-    customer_id: str = Field(..., description="Customer ID to get recommendations for")
 
 class SystemStatus(BaseModel):
     initialized: bool
@@ -377,116 +358,6 @@ async def chat(
     except Exception as e:
         logger.error(f"❌ Chat request failed: {str(e)}")
         raise HTTPException(status_code=500, detail=f"Chat request failed: {str(e)}")
-
-@app.get("/customers", response_model=List[CustomerResponse])
-async def get_customers(database=Depends(get_database)):
-    """Get list of all customers"""
-    try:
-        result = database.run("""
-            SELECT customerid, customername, customertype, country, region, totalstores 
-            FROM customers 
-            ORDER BY customername
-        """)
-        
-        customers = []
-        for row in result:
-            customers.append(CustomerResponse(
-                customer_id=row[0],
-                customer_name=row[1],
-                customer_type=row[2],
-                country=row[3],
-                region=row[4],
-                total_stores=row[5]
-            ))
-        
-        return customers
-        
-    except Exception as e:
-        logger.error(f"❌ Failed to get customers: {str(e)}")
-        raise HTTPException(status_code=500, detail=f"Failed to get customers: {str(e)}")
-
-@app.get("/products", response_model=List[ProductResponse])
-async def get_products(
-    limit: int = 100,
-    category: Optional[str] = None,
-    database=Depends(get_database)
-):
-    """Get list of products with optional filtering"""
-    try:
-        query = """
-            SELECT productid, name, category, subcategory, price, tags 
-            FROM products 
-        """
-        
-        if category:
-            query += f" WHERE category = '{category}'"
-        
-        query += f" ORDER BY name LIMIT {limit}"
-        
-        result = database.run(query)
-        
-        products = []
-        for row in result:
-            products.append(ProductResponse(
-                product_id=row[0],
-                name=row[1],
-                category=row[2],
-                subcategory=row[3],
-                price=row[4],
-                tags=row[5]
-            ))
-        
-        return products
-        
-    except Exception as e:
-        logger.error(f"❌ Failed to get products: {str(e)}")
-        raise HTTPException(status_code=500, detail=f"Failed to get products: {str(e)}")
-
-@app.get("/recommendations/{customer_id}")
-async def get_recommendations(
-    customer_id: str,
-    database=Depends(get_database)
-):
-    """Get recommendations for a specific customer"""
-    try:
-        # Check if customer exists
-        customer_check = database.run(f"""
-            SELECT customername FROM customers WHERE customerid = '{customer_id}'
-        """)
-        
-        if not customer_check:
-            raise HTTPException(status_code=404, detail=f"Customer {customer_id} not found")
-        
-        # Get customer catalogue
-        catalogue = database.run(f"""
-            SELECT customercatalogueitemid, productname, product_category, 
-                   description, ingredients, quantityrequired
-            FROM customer_catalogue 
-            WHERE customerid = '{customer_id}'
-        """)
-        
-        # Get sales data
-        sales = database.run(f"""
-            SELECT productid, quantity, totalamount, saledate
-            FROM sales 
-            WHERE customerid = '{customer_id}'
-            ORDER BY saledate DESC
-        """)
-        
-        return {
-            "customer_id": customer_id,
-            "customer_name": customer_check[0][0],
-            "catalogue_items": len(catalogue),
-            "total_sales": len(sales),
-            "catalogue": catalogue,
-            "recent_sales": sales[:10]  # Last 10 sales
-        }
-        
-    except HTTPException:
-        raise
-    except Exception as e:
-        logger.error(f"❌ Failed to get recommendations: {str(e)}")
-        raise HTTPException(status_code=500, detail=f"Failed to get recommendations: {str(e)}")
 
 @app.post("/initialize")
 async def initialize_system(background_tasks: BackgroundTasks):
