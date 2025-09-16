@@ -1,0 +1,22 @@
+connect postgres
+==============
+sudo -u postgres psql
+
+drop all tables
+================
+DROP TABLE IF EXISTS customer_catalogue, customers, products, sales CASCADE;
+
+docker running
+=============
+docker ps -a
+
+Stop and remove container
+=========================
+docker rm -f strategy_agent_30_optimized_weaviate_1
+
+Remove all volumes associated with it
+===============================
+docker volume prune -f
+
+Recreate using your docker-compose
+docker-compose -f docker-compose.weaviate.yml up -d

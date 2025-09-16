@@ -212,18 +212,22 @@ class ChatbotInitializer:
             Category VARCHAR(50),
             Description TEXT,
             Ingredients TEXT,
-            Calories INTEGER,
             QuantityRequired INTEGER DEFAULT 1
         );
         
         -- Create sales table
         CREATE TABLE sales (
-            SaleID SERIAL PRIMARY KEY,
+            SaleID VARCHAR(10) PRIMARY KEY,
             CustomerID VARCHAR(10) REFERENCES customers(CustomerID),
+            StoreID VARCHAR(10),
             ProductID INTEGER REFERENCES products(ProductID),
+            PlantID INTEGER,
             Quantity INTEGER NOT NULL,
-            SaleDate DATE DEFAULT CURRENT_DATE,
-            TotalAmount DECIMAL(10,2)
+            UnitPrice DECIMAL(10,2),
+            TotalAmount DECIMAL(10,2),
+            SaleDate DATE,
+            DeliveryDate DATE,
+            Status VARCHAR(50)
         );
         """
         
@@ -247,8 +251,8 @@ class ChatbotInitializer:
             # Load and process customer catalogue data
             self._load_customer_catalogue()
             
-            # Generate and load sales data (since we don't have sales CSV)
-            self._generate_sample_sales_data()
+            # Load actual sales data
+            self._load_sales_data()
             
             logger.info("✅ CSV data ingestion completed")
             
@@ -304,7 +308,6 @@ class ChatbotInitializer:
             df_catalogue.columns = df_catalogue.columns.str.replace('"', '').str.lower()
             
             # Clean and prepare data
-            df_catalogue['calories'] = pd.to_numeric(df_catalogue['calories'], errors='coerce').fillna(0).astype(int)
             df_catalogue['quantityrequired'] = pd.to_numeric(df_catalogue['quantityrequired'], errors='coerce').fillna(1).astype(int)
             
             # Insert into database
@@ -315,45 +318,31 @@ class ChatbotInitializer:
             logger.error(f"❌ Failed to load customer catalogue: {str(e)}")
             raise
     
-    def _generate_sample_sales_data(self):
-        """Generate sample sales data"""
+    def _load_sales_data(self):
+        """Load actual sales data from CSV"""
         try:
-            # Get customer and product data
-            customers_df = pd.read_sql('SELECT CustomerID FROM customers', self.db_engine)
-            products_df = pd.read_sql('SELECT ProductID, Price FROM products', self.db_engine)
+            df_sales = pd.read_csv('data/sales_enhanced.csv')
             
-            # Generate sample sales data
-            sales_data = []
-            for _, customer in customers_df.iterrows():
-                # Random number of sales per customer (1-10)
-                num_sales = pd.Series([1, 2, 3, 4, 5, 6, 7, 8, 9, 10]).sample(1).iloc[0]
-                
-                for _ in range(num_sales):
-                    # Random product
-                    product = products_df.sample(1).iloc[0]
-                    
-                    # Random quantity (1-50)
-                    quantity = pd.Series(range(1, 51)).sample(1).iloc[0]
-                    
-                    # Calculate total amount
-                    total_amount = product['price'] * quantity
-                    
-                    sales_data.append({
-                        'CustomerID': customer['CustomerID'],
-                        'ProductID': product['ProductID'],
-                        'Quantity': quantity,
-                        'TotalAmount': total_amount
-                    })
+            # Clean column names
+            df_sales.columns = df_sales.columns.str.replace('"', '').str.lower()
             
-            # Create sales DataFrame
-            sales_df = pd.DataFrame(sales_data)
+            # Clean and prepare data
+            df_sales['quantity'] = pd.to_numeric(df_sales['quantity'], errors='coerce').fillna(0).astype(int)
+            df_sales['unitprice'] = pd.to_numeric(df_sales['unitprice'], errors='coerce').fillna(0.0)
+            df_sales['totalamount'] = pd.to_numeric(df_sales['totalamount'], errors='coerce').fillna(0.0)
+            df_sales['plantid'] = pd.to_numeric(df_sales['plantid'], errors='coerce').fillna(0).astype(int)
+            df_sales['productid'] = pd.to_numeric(df_sales['productid'], errors='coerce').fillna(0).astype(int)
+            
+            # Convert date columns
+            df_sales['saledate'] = pd.to_datetime(df_sales['saledate'], format='%d-%m-%Y', errors='coerce')
+            df_sales['deliverydate'] = pd.to_datetime(df_sales['deliverydate'], format='%d-%m-%Y', errors='coerce')
             
             # Insert into database
-            sales_df.to_sql('sales', self.db_engine, if_exists='append', index=False)
-            logger.info(f"✅ Generated {len(sales_df)} sample sales records")
+            df_sales.to_sql('sales', self.db_engine, if_exists='append', index=False)
+            logger.info(f"✅ Loaded {len(df_sales)} sales records")
             
         except Exception as e:
-            logger.error(f"❌ Failed to generate sales data: {str(e)}")
+            logger.error(f"❌ Failed to load sales data: {str(e)}")
             raise
     
     def _setup_vector_store(self):
