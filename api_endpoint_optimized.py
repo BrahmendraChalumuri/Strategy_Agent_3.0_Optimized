@@ -136,12 +136,18 @@ async def lifespan(app: FastAPI):
         
         logger.info(f"🎉 Startup completed: {existing_count} existing files loaded, {generated_count} new files generated, {failed_count} failed")
         
-        # Generate combined report if we have individual reports
+        # Generate combined report only if it doesn't exist and we have individual reports
         if generated_count > 0 or existing_count > 0:
             try:
-                logger.info("📊 Generating combined portfolio report...")
-                await generate_combined_portfolio_report()
-                logger.info("✅ Combined portfolio report generated successfully")
+                # Check if combined report already exists
+                combined_report_exists = check_existing_combined_report()
+                
+                if combined_report_exists:
+                    logger.info("📁 Combined portfolio report already exists, skipping generation")
+                else:
+                    logger.info("📊 Generating combined portfolio report...")
+                    await generate_combined_portfolio_report()
+                    logger.info("✅ Combined portfolio report generated successfully")
             except Exception as e:
                 logger.warning(f"⚠️ Failed to generate combined report: {str(e)}")
     
@@ -692,6 +698,15 @@ async def regenerate_all_recommendations(request: RegenerateRequest, background_
         logger.info(f"🎉 Regeneration completed: {success_count} successful, {failed_count} failed")
         logger.info(f"🗑️  Old files were deleted immediately after each customer's successful generation")
         
+        # Generate combined portfolio report after all individual reports are regenerated
+        if success_count > 0:
+            try:
+                logger.info("📊 Generating combined portfolio report after regeneration...")
+                await generate_combined_portfolio_report()
+                logger.info("✅ Combined portfolio report generated successfully")
+            except Exception as e:
+                logger.warning(f"⚠️ Failed to generate combined report: {str(e)}")
+        
         # Return array of all recommendation data (similar to GET /recommendations/all)
         all_recommendations = []
         for customer_id_str, data in recommendations_storage.items():
@@ -810,6 +825,7 @@ async def regenerate_customer_recommendations(customer_id: CustomerID, request: 
             detail=f"Error regenerating recommendations: {str(e)}"
         )
 
+
 @app.get("/performance-stats", response_model=Dict[str, Any])
 async def get_performance_stats():
     """
@@ -909,6 +925,28 @@ def check_existing_recommendations(customer_id: str) -> Optional[Dict[str, str]]
     except Exception as e:
         logger.error(f"❌ Error checking existing recommendations: {str(e)}")
         return None
+
+def check_existing_combined_report() -> bool:
+    """Check if combined portfolio report already exists"""
+    try:
+        # Look for existing combined portfolio reports
+        combined_pattern = "reports/combined_portfolio_report_*.pdf"
+        combined_files = glob.glob(combined_pattern)
+        
+        if not combined_files:
+            return False
+        
+        # Check if any combined report exists
+        for combined_file in combined_files:
+            if os.path.exists(combined_file):
+                logger.info(f"📁 Found existing combined report: {os.path.basename(combined_file)}")
+                return True
+        
+        return False
+        
+    except Exception as e:
+        logger.error(f"❌ Error checking existing combined report: {str(e)}")
+        return False
 
 def convert_numpy_types(obj):
     """Convert numpy types to native Python types for JSON serialization"""
@@ -1116,6 +1154,26 @@ async def clear_old_all_recommendation_files(exclude_timestamps: dict):
     except Exception as e:
         logger.error(f"❌ Error clearing old files for all customers: {str(e)}")
 
+async def clear_old_combined_reports(exclude_timestamp: str):
+    """Clear old combined portfolio reports, excluding the newly generated one"""
+    try:
+        deleted_count = 0
+        
+        # Clear old combined portfolio reports (excluding the new one)
+        combined_pattern = "reports/combined_portfolio_report_*.pdf"
+        combined_files = glob.glob(combined_pattern)
+        for file in combined_files:
+            # Check if this is NOT the newly generated file
+            if exclude_timestamp not in file:
+                os.remove(file)
+                deleted_count += 1
+                logger.info(f"🗑️  Deleted old combined report: {os.path.basename(file)}")
+        
+        logger.info(f"🗑️  Cleared {deleted_count} old combined portfolio reports")
+        
+    except Exception as e:
+        logger.error(f"❌ Error clearing old combined reports: {str(e)}")
+
 def get_customer_name(customer_id: str) -> str:
     """Get customer name from the engine"""
     if not engine:
@@ -1155,6 +1213,10 @@ async def generate_combined_portfolio_report():
         
         if success:
             logger.info(f"✅ Combined portfolio report generated: {output_path}")
+            
+            # Delete old combined reports (keep only the new one)
+            await clear_old_combined_reports(timestamp)
+            
             return True
         else:
             logger.error("❌ Failed to generate combined portfolio report")
