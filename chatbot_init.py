@@ -353,7 +353,7 @@ class ChatbotInitializer:
         try:
             logger.info("📚 Setting up Weaviate vector store for PDF reports...")
             
-            # Try to initialize Weaviate client (v4 API)
+            # Initialize Weaviate client (v4 API)
             try:
                 if self.weaviate_api_key:
                     # For Weaviate Cloud Services
@@ -373,9 +373,8 @@ class ChatbotInitializer:
                 logger.info("✅ Connected to Weaviate successfully")
                 
             except Exception as e:
-                logger.warning(f"⚠️ Weaviate connection failed: {str(e)}")
-                logger.info("📝 Continuing without vector store - chatbot will work with database queries only")
-                return
+                logger.error(f"❌ Weaviate connection failed: {str(e)}")
+                raise Exception(f"Failed to connect to Weaviate: {str(e)}")
             
             # Initialize embeddings and create vector store
             try:
@@ -388,19 +387,14 @@ class ChatbotInitializer:
                     logger.warning("⚠️ No PDF reports found in reports/ directory")
                     # Create empty vector store with dummy document
                     dummy_doc = Document(page_content="No PDF reports available", metadata={"source": "empty"})
-                    try:
-                        vector_store = Weaviate.from_documents(
-                            [dummy_doc], 
-                            embeddings, 
-                            client=weaviate_client,
-                            index_name="PDFReports"
-                        )
-                        logger.info("✅ Created empty vector store")
-                    except Exception:
-                        # Fallback to FAISS
-                        from langchain_community.vectorstores import FAISS
-                        vector_store = FAISS.from_documents([dummy_doc], embeddings)
-                        logger.info("✅ Created empty FAISS vector store")
+                    vector_store = Weaviate.from_documents(
+                        [dummy_doc], 
+                        embeddings, 
+                        client=weaviate_client,
+                        index_name="PDFReports"
+                    )
+                    logger.info("✅ Created empty Weaviate vector store")
+                    weaviate_client.close()
                     return
                 
                 logger.info(f"📄 Found {len(pdf_files)} PDF reports")
@@ -429,17 +423,13 @@ class ChatbotInitializer:
                 if not documents:
                     logger.warning("⚠️ No documents loaded, creating empty vector store")
                     dummy_doc = Document(page_content="No PDF reports available", metadata={"source": "empty"})
-                    try:
-                        vector_store = Weaviate.from_documents(
-                            [dummy_doc], 
-                            embeddings, 
-                            client=weaviate_client,
-                            index_name="PDFReports"
-                        )
-                    except Exception:
-                        # Fallback to FAISS
-                        from langchain_community.vectorstores import FAISS
-                        vector_store = FAISS.from_documents([dummy_doc], embeddings)
+                    vector_store = Weaviate.from_documents(
+                        [dummy_doc], 
+                        embeddings, 
+                        client=weaviate_client,
+                        index_name="PDFReports"
+                    )
+                    weaviate_client.close()
                     return
                 
                 # Split documents
@@ -452,32 +442,37 @@ class ChatbotInitializer:
                 logger.info(f"📝 Split into {len(split_docs)} chunks")
                 
                 # Create Weaviate vector store using v4 compatible method
+                # First, check if collection exists and delete it if it does
                 try:
-                    vector_store = Weaviate.from_documents(
-                        split_docs, 
-                        embeddings, 
-                        client=weaviate_client,
-                        index_name="PDFReports",
-                        text_key="content"
-                    )
-                    logger.info("✅ Weaviate vector store created successfully")
-                except Exception as weaviate_error:
-                    logger.warning(f"⚠️ Weaviate v4 compatibility issue: {str(weaviate_error)}")
-                    logger.info("📝 Using FAISS fallback...")
-                    # Fallback: Create a simple in-memory vector store
-                    from langchain_community.vectorstores import FAISS
-                    vector_store = FAISS.from_documents(split_docs, embeddings)
-                    logger.info("✅ FAISS vector store created successfully")
+                    existing_collection = weaviate_client.collections.get("PDFReports")
+                    if existing_collection:
+                        logger.info("📝 Deleting existing PDFReports collection...")
+                        weaviate_client.collections.delete("PDFReports")
+                        logger.info("✅ Deleted existing collection")
+                except:
+                    # Collection doesn't exist, which is fine
+                    pass
+                
+                # Create new vector store
+                vector_store = Weaviate.from_documents(
+                    split_docs, 
+                    embeddings, 
+                    client=weaviate_client,
+                    index_name="PDFReports",
+                    text_key="content"
+                )
+                logger.info("✅ Weaviate vector store created successfully")
                 
                 weaviate_client.close()
                 
             except Exception as e:
-                logger.warning(f"⚠️ Vector store creation failed: {str(e)}")
-                logger.info("📝 Continuing without vector store - chatbot will work with database queries only")
+                logger.error(f"❌ Vector store creation failed: {str(e)}")
+                weaviate_client.close()
+                raise Exception(f"Failed to create Weaviate vector store: {str(e)}")
             
         except Exception as e:
-            logger.warning(f"⚠️ Weaviate vector store setup failed: {str(e)}")
-            logger.info("📝 Continuing without vector store - chatbot will work with database queries only")
+            logger.error(f"❌ Weaviate vector store setup failed: {str(e)}")
+            raise Exception(f"Weaviate vector store setup failed: {str(e)}")
     
     def run_initialization(self):
         """Run the complete initialization process"""

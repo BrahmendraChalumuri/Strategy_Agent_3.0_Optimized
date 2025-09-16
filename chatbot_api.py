@@ -45,7 +45,7 @@ from langchain.tools import BaseTool
 
 # Vector database and embeddings
 from langchain_community.embeddings import OpenAIEmbeddings
-from langchain_community.vectorstores import Weaviate, FAISS
+from langchain_community.vectorstores import Weaviate
 import weaviate
 
 # Environment and utilities
@@ -248,22 +248,17 @@ async def initialize_vector_store():
                 )
                 logger.info("✅ Connected to existing Weaviate vector store")
             else:
-                logger.info("📝 Weaviate collection exists but is empty")
+                logger.warning("⚠️ Weaviate collection exists but is empty")
                 weaviate_client.close()
-        except:
-            logger.info("📝 Weaviate collection doesn't exist, using FAISS fallback")
+                raise Exception("Weaviate collection is empty")
+        except Exception as e:
+            logger.error(f"❌ Weaviate collection not found or error: {str(e)}")
             weaviate_client.close()
-            
-            # Fallback to FAISS
-            try:
-                vector_store = FAISS.load_local("cache/faiss_vector_store", embeddings)
-                logger.info("✅ Loaded FAISS vector store from cache")
-            except:
-                logger.info("📝 No FAISS cache found, vector store not available")
+            raise Exception(f"Weaviate collection not available: {str(e)}")
                 
     except Exception as e:
-        logger.warning(f"⚠️ Vector store setup failed: {str(e)}")
-        # Continue without vector store
+        logger.error(f"❌ Vector store setup failed: {str(e)}")
+        raise Exception(f"Vector store setup failed: {str(e)}")
 
 # API Endpoints
 
@@ -411,8 +406,8 @@ async def get_system_status(database=Depends(get_database)):
                     collections = vector_store.client.collections.list_all()
                     vector_store_collections = [col.name for col in collections]
                 else:
-                    # FAISS
-                    vector_store_collections = ["FAISS"]
+                    # Weaviate without client attribute
+                    vector_store_collections = ["Weaviate"]
             except:
                 pass
         

@@ -9,8 +9,7 @@ psycopg2-binary>=2.9.0
 sqlalchemy>=2.0.0
 
 # Vector database and embeddings
-weaviate-client>=3.25.0
-faiss-cpu>=1.7.0
+weaviate-client>=4.0.0
 
 # PDF processing
 pypdf>=3.0.0
