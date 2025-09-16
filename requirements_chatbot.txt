@@ -1,7 +1,7 @@
 # Core LangChain and AI dependencies
-langchain>=0.1.0
-langchain-community>=0.0.20
-langchain-openai>=0.0.5
+langchain>=0.2.0
+langchain-community>=0.2.0
+langchain-openai>=0.1.0
 openai>=1.0.0
 
 # Database dependencies

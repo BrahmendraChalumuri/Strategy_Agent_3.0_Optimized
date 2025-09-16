@@ -566,7 +566,8 @@ class HybridChatbotSystem:
                 memory=self.memory,
                 verbose=True,
                 handle_parsing_errors=True,
-                max_iterations=5
+                max_iterations=10,  # Increased from 5 to 10
+                max_execution_time=60  # Add execution time limit
             )
             
             logger.info("✅ Hybrid agent setup completed")
@@ -588,7 +589,16 @@ class HybridChatbotSystem:
             
         except Exception as e:
             logger.error(f"❌ Query processing failed: {str(e)}")
-            return f"Sorry, I encountered an error processing your query: {str(e)}"
+            
+            # Provide helpful error message with common solutions
+            error_msg = f"Sorry, I encountered an error processing your query: {str(e)}\n\n"
+            error_msg += "💡 **Common solutions:**\n"
+            error_msg += "• Try rephrasing your question\n"
+            error_msg += "• Check if you're asking about customers, products, sales, or stores\n"
+            error_msg += "• For store counts, try: 'Which customer has the most stores?'\n"
+            error_msg += "• For sales data, try: 'What are the top selling products?'\n"
+            
+            return error_msg
     
     def get_database_stats(self) -> Dict[str, Any]:
         """Get database statistics"""
