@@ -307,6 +307,9 @@ class ChatbotInitializer:
             # Clean column names (remove all quotes if present and convert to lowercase)
             df_catalogue.columns = df_catalogue.columns.str.replace('"', '').str.lower()
             
+            # Fix the "product category" column name to match database schema
+            df_catalogue = df_catalogue.rename(columns={'product category': 'product_category'})
+            
             # Clean and prepare data
             df_catalogue['quantityrequired'] = pd.to_numeric(df_catalogue['quantityrequired'], errors='coerce').fillna(1).astype(int)
             
