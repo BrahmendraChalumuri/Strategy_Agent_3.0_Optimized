@@ -265,11 +265,22 @@ class ChatbotInitializer:
         try:
             df = pd.read_csv('data/customer.csv')
             
-            # Clean column names (remove all quotes if present and convert to lowercase)
-            df.columns = df.columns.str.replace('"', '').str.lower()
+            # Clean column names (remove all quotes if present)
+            df.columns = df.columns.str.replace('"', '')
+            
+            # Rename columns to match database schema exactly
+            column_mapping = {
+                'CustomerID': 'CustomerID',
+                'CustomerName': 'CustomerName',
+                'CustomerType': 'CustomerType',
+                'Country': 'Country',
+                'Region': 'Region',
+                'TotalStores': 'TotalStores'
+            }
+            df = df.rename(columns=column_mapping)
             
             # Clean and prepare data
-            df['totalstores'] = pd.to_numeric(df['totalstores'], errors='coerce').fillna(0).astype(int)
+            df['TotalStores'] = pd.to_numeric(df['TotalStores'], errors='coerce').fillna(0).astype(int)
             
             # Insert into database
             df.to_sql('customers', self.db_engine, if_exists='append', index=False)
@@ -284,12 +295,23 @@ class ChatbotInitializer:
         try:
             df = pd.read_csv('data/products.csv')
             
-            # Clean column names (remove all quotes if present and convert to lowercase)
-            df.columns = df.columns.str.replace('"', '').str.lower()
+            # Clean column names (remove all quotes if present)
+            df.columns = df.columns.str.replace('"', '')
+            
+            # Rename columns to match database schema exactly
+            column_mapping = {
+                'ProductID': 'ProductID',
+                'Name': 'Name',
+                'Category': 'Category',
+                'SubCategory': 'SubCategory',
+                'Price': 'Price',
+                'Tags': 'Tags'
+            }
+            df = df.rename(columns=column_mapping)
             
             # Clean and prepare data
-            df['price'] = pd.to_numeric(df['price'], errors='coerce').fillna(0.0)
-            df['productid'] = pd.to_numeric(df['productid'], errors='coerce').fillna(0).astype(int)
+            df['Price'] = pd.to_numeric(df['Price'], errors='coerce').fillna(0.0)
+            df['ProductID'] = pd.to_numeric(df['ProductID'], errors='coerce').fillna(0).astype(int)
             
             # Insert into database
             df.to_sql('products', self.db_engine, if_exists='append', index=False)
@@ -304,11 +326,23 @@ class ChatbotInitializer:
         try:
             df_catalogue = pd.read_csv('data/customer_catalogue_enhanced.csv')
             
-            # Clean column names
-            df_catalogue.columns = df_catalogue.columns.str.replace('"', '').str.lower()
+            # Clean column names and map to database column names
+            df_catalogue.columns = df_catalogue.columns.str.replace('"', '')
+            
+            # Rename columns to match database schema exactly
+            column_mapping = {
+                'CustomerCatalogueItemID': 'CustomerCatalogueItemID',
+                'CustomerID': 'CustomerID', 
+                'ProductName': 'ProductName',
+                'Product Category': 'Product Category',
+                'Description': 'Description',
+                'Ingredients': 'Ingredients',
+                'QuantityRequired': 'QuantityRequired'
+            }
+            df_catalogue = df_catalogue.rename(columns=column_mapping)
             
             # Clean and prepare data
-            df_catalogue['quantityrequired'] = pd.to_numeric(df_catalogue['quantityrequired'], errors='coerce').fillna(1).astype(int)
+            df_catalogue['QuantityRequired'] = pd.to_numeric(df_catalogue['QuantityRequired'], errors='coerce').fillna(1).astype(int)
             
             # Insert into database
             df_catalogue.to_sql('customer_catalogue', self.db_engine, if_exists='append', index=False)
@@ -324,18 +358,34 @@ class ChatbotInitializer:
             df_sales = pd.read_csv('data/sales_enhanced.csv')
             
             # Clean column names
-            df_sales.columns = df_sales.columns.str.replace('"', '').str.lower()
+            df_sales.columns = df_sales.columns.str.replace('"', '')
+            
+            # Rename columns to match database schema exactly
+            column_mapping = {
+                'SaleID': 'SaleID',
+                'CustomerID': 'CustomerID',
+                'StoreID': 'StoreID',
+                'ProductID': 'ProductID',
+                'PlantID': 'PlantID',
+                'Quantity': 'Quantity',
+                'UnitPrice': 'UnitPrice',
+                'TotalAmount': 'TotalAmount',
+                'SaleDate': 'SaleDate',
+                'DeliveryDate': 'DeliveryDate',
+                'Status': 'Status'
+            }
+            df_sales = df_sales.rename(columns=column_mapping)
             
             # Clean and prepare data
-            df_sales['quantity'] = pd.to_numeric(df_sales['quantity'], errors='coerce').fillna(0).astype(int)
-            df_sales['unitprice'] = pd.to_numeric(df_sales['unitprice'], errors='coerce').fillna(0.0)
-            df_sales['totalamount'] = pd.to_numeric(df_sales['totalamount'], errors='coerce').fillna(0.0)
-            df_sales['plantid'] = pd.to_numeric(df_sales['plantid'], errors='coerce').fillna(0).astype(int)
-            df_sales['productid'] = pd.to_numeric(df_sales['productid'], errors='coerce').fillna(0).astype(int)
+            df_sales['Quantity'] = pd.to_numeric(df_sales['Quantity'], errors='coerce').fillna(0).astype(int)
+            df_sales['UnitPrice'] = pd.to_numeric(df_sales['UnitPrice'], errors='coerce').fillna(0.0)
+            df_sales['TotalAmount'] = pd.to_numeric(df_sales['TotalAmount'], errors='coerce').fillna(0.0)
+            df_sales['PlantID'] = pd.to_numeric(df_sales['PlantID'], errors='coerce').fillna(0).astype(int)
+            df_sales['ProductID'] = pd.to_numeric(df_sales['ProductID'], errors='coerce').fillna(0).astype(int)
             
             # Convert date columns
-            df_sales['saledate'] = pd.to_datetime(df_sales['saledate'], format='%d-%m-%Y', errors='coerce')
-            df_sales['deliverydate'] = pd.to_datetime(df_sales['deliverydate'], format='%d-%m-%Y', errors='coerce')
+            df_sales['SaleDate'] = pd.to_datetime(df_sales['SaleDate'], format='%d-%m-%Y', errors='coerce')
+            df_sales['DeliveryDate'] = pd.to_datetime(df_sales['DeliveryDate'], format='%d-%m-%Y', errors='coerce')
             
             # Insert into database
             df_sales.to_sql('sales', self.db_engine, if_exists='append', index=False)
