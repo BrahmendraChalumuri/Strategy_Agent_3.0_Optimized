@@ -206,10 +206,10 @@ class ChatbotInitializer:
         
         -- Create customer_catalogue table
         CREATE TABLE customer_catalogue (
-            CatalogueID VARCHAR(20) PRIMARY KEY,
+            CustomerCatalogueItemID VARCHAR(20) PRIMARY KEY,
             CustomerID VARCHAR(10) REFERENCES customers(CustomerID),
             ProductName VARCHAR(200) NOT NULL,
-            Category VARCHAR(50),
+            "Product Category" VARCHAR(50),
             Description TEXT,
             Ingredients TEXT,
             QuantityRequired INTEGER DEFAULT 1
