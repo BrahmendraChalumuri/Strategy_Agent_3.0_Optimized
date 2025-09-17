@@ -237,18 +237,26 @@ class OptimizedRecommendationEngine:
         
         try:
             # Construct the prompt
-            prompt = f"""Please analyze if the product "{product_name}" from products.csv can be used as an ingredient of "{catalogue_item_name}" from customer_catalogue_enhanced.csv.
+            prompt = f"""Analyze if the product "{product_name}" could realistically be used as an actual ingredient in making "{catalogue_item_name}".
+
+Consider:
+1. Culinary compatibility and cooking methods
+2. Whether the suggested product fits the food category and preparation style
+3. Real-world kitchen usage, not just ingredient name matching
+4. Food science and baking/cooking logic
 
 Catalogue Item Details:
 - Product Name: {catalogue_item_name}
 - Product Category: {catalogue_category}
 - Description: {catalogue_description}
-- Ingredients: {catalogue_ingredients}
+- Current Ingredients: {catalogue_ingredients}
 
-Potential Ingredient: {ingredient}
-Potential Product: {product_name}
+Potential Ingredient Match: {ingredient}
+Suggested Product: {product_name}
 
-Please answer with ONLY "YES" or "NO" followed by a brief reasoning (max 50 words)."""
+Example: "Biscuit Dough" in a chocolate chip cookie recipe refers to cookie dough, NOT actual biscuit dough (which is for biscuits, not cookies).
+
+Please answer with ONLY "YES" or "NO" followed by brief reasoning focusing on real culinary compatibility (max 50 words)."""
             
             headers = {
                 "Authorization": f"Bearer {self.perplexity_api_key}",

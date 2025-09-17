@@ -69,10 +69,11 @@ def check_weaviate_vector_store():
                     for query in test_queries:
                         print(f"\n📝 Query: '{query}'")
                         try:
+                            import weaviate.classes as wvc
                             response = collection.query.near_text(
                                 query=query,
                                 limit=2,
-                                return_metadata=weaviate.classes.MetadataQuery(distance=True)
+                                return_metadata=wvc.query.MetadataQuery(distance=True)
                             )
                             
                             print(f"   Found {len(response.objects)} results:")

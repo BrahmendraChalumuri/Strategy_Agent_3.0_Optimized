@@ -453,18 +453,20 @@ class ChatbotInitializer:
                 
                 # Create collection with proper v4 schema
                 try:
+                    import weaviate.classes as wvc
+                    
                     collection = weaviate_client.collections.create(
                         name="PDFReports",
-                        properties=[
-                            weaviate.classes.Property(name="content", data_type=weaviate.classes.DataType.TEXT),
-                            weaviate.classes.Property(name="source", data_type=weaviate.classes.DataType.TEXT),
-                            weaviate.classes.Property(name="filename", data_type=weaviate.classes.DataType.TEXT),
-                            weaviate.classes.Property(name="file_type", data_type=weaviate.classes.DataType.TEXT),
-                            weaviate.classes.Property(name="ingestion_date", data_type=weaviate.classes.DataType.TEXT),
-                        ],
-                        vectorizer_config=weaviate.classes.Configure.Vectorizer.text2vec_openai(
+                        vectorizer_config=wvc.config.Configure.Vectorizer.text2vec_openai(
                             model="text-embedding-ada-002"
-                        )
+                        ),
+                        properties=[
+                            wvc.config.Property(name="content", data_type=wvc.config.DataType.TEXT),
+                            wvc.config.Property(name="source", data_type=wvc.config.DataType.TEXT),
+                            wvc.config.Property(name="filename", data_type=wvc.config.DataType.TEXT),
+                            wvc.config.Property(name="file_type", data_type=wvc.config.DataType.TEXT),
+                            wvc.config.Property(name="ingestion_date", data_type=wvc.config.DataType.TEXT),
+                        ]
                     )
                     logger.info("✅ Created PDFReports collection")
                 except Exception as e:

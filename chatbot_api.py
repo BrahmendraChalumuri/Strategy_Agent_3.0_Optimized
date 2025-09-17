@@ -446,10 +446,11 @@ async def search_documents(
             collection = vector_store_dep['collection']
             
             # Perform similarity search using Weaviate v4 API
+            import weaviate.classes as wvc
             response = collection.query.near_text(
                 query=query,
                 limit=limit,
-                return_metadata=weaviate.classes.MetadataQuery(distance=True)
+                return_metadata=wvc.query.MetadataQuery(distance=True)
             )
             
             results = []
