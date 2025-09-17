@@ -6,7 +6,7 @@ Script to check the Weaviate vector store data
 import os
 import sys
 from dotenv import load_dotenv
-from langchain_community.embeddings import OpenAIEmbeddings
+from langchain_openai import OpenAIEmbeddings
 from langchain_community.vectorstores import Weaviate
 import weaviate
 
@@ -52,19 +52,11 @@ def check_weaviate_vector_store():
             # Check if PDFReports collection exists
             try:
                 collection = weaviate_client.collections.get("PDFReports")
-                total_count = collection.aggregate().total_count
+                total_count = collection.aggregate.over_all(total_count=True).total_count
                 print(f"📊 PDFReports collection found with {total_count} documents")
                 
                 if total_count > 0:
-                    # Initialize vector store for search
-                    vector_store = Weaviate(
-                        client=weaviate_client,
-                        index_name="PDFReports",
-                        text_key="content",
-                        embedding=embeddings
-                    )
-                    
-                    # Test search functionality
+                    # Test search functionality using native Weaviate v4 API
                     print("\n🔍 Testing search functionality:")
                     test_queries = [
                         "customer analysis",
@@ -77,11 +69,20 @@ def check_weaviate_vector_store():
                     for query in test_queries:
                         print(f"\n📝 Query: '{query}'")
                         try:
-                            docs = vector_store.similarity_search(query, k=2)
-                            print(f"   Found {len(docs)} results:")
-                            for i, doc in enumerate(docs, 1):
-                                print(f"   {i}. Content preview: {doc.page_content[:100]}...")
-                                print(f"      Source: {doc.metadata.get('source', 'unknown')}")
+                            response = collection.query.near_text(
+                                query=query,
+                                limit=2,
+                                return_metadata=weaviate.classes.MetadataQuery(distance=True)
+                            )
+                            
+                            print(f"   Found {len(response.objects)} results:")
+                            for i, obj in enumerate(response.objects, 1):
+                                content = obj.properties.get("content", "")
+                                source = obj.properties.get("source", "unknown")
+                                distance = obj.metadata.distance if obj.metadata else "unknown"
+                                print(f"   {i}. Content preview: {content[:100]}...")
+                                print(f"      Source: {source}")
+                                print(f"      Distance: {distance}")
                         except Exception as e:
                             print(f"   ❌ Search failed: {str(e)}")
                 else:

@@ -44,7 +44,7 @@ from langchain.memory import ConversationBufferMemory
 from langchain.tools import BaseTool
 
 # Vector database and embeddings
-from langchain_community.embeddings import OpenAIEmbeddings
+from langchain_openai import OpenAIEmbeddings
 from langchain_community.vectorstores import Weaviate
 import weaviate
 
@@ -239,14 +239,17 @@ async def initialize_vector_store():
         # Try to get existing collection
         try:
             collection = weaviate_client.collections.get("PDFReports")
-            if collection.aggregate().total_count > 0:
-                vector_store = Weaviate(
-                    client=weaviate_client,
-                    index_name="PDFReports",
-                    text_key="content",
-                    embedding=embeddings
-                )
-                logger.info("✅ Connected to existing Weaviate vector store")
+            total_count = collection.aggregate.over_all(total_count=True).total_count
+            
+            if total_count > 0:
+                # Store the client and embeddings globally for search functionality
+                vector_store = {
+                    'client': weaviate_client,
+                    'collection': collection,
+                    'embeddings': embeddings,
+                    'type': 'weaviate_v4'
+                }
+                logger.info(f"✅ Connected to Weaviate vector store with {total_count} documents")
             else:
                 logger.warning("⚠️ Weaviate collection exists but is empty")
                 weaviate_client.close()
@@ -401,12 +404,17 @@ async def get_system_status(database=Depends(get_database)):
         vector_store_collections = []
         if vector_store:
             try:
-                if hasattr(vector_store, 'client'):
-                    # Weaviate
+                if isinstance(vector_store, dict) and vector_store.get('type') == 'weaviate_v4':
+                    # Our custom Weaviate v4 implementation
+                    client = vector_store['client']
+                    collections = client.collections.list_all()
+                    vector_store_collections = [col for col in collections]
+                elif hasattr(vector_store, 'client'):
+                    # LangChain Weaviate wrapper
                     collections = vector_store.client.collections.list_all()
                     vector_store_collections = [col.name for col in collections]
                 else:
-                    # Weaviate without client attribute
+                    # Other vector store types
                     vector_store_collections = ["Weaviate"]
             except:
                 pass
@@ -433,16 +441,41 @@ async def search_documents(
         if not vector_store_dep:
             raise HTTPException(status_code=503, detail="Vector store not available")
         
-        # Perform similarity search
-        docs = vector_store_dep.similarity_search(query, k=limit)
-        
-        results = []
-        for doc in docs:
-            results.append({
-                "content": doc.page_content,
-                "metadata": doc.metadata,
-                "source": doc.metadata.get("source", "unknown")
-            })
+        # Check if it's our custom Weaviate v4 implementation
+        if isinstance(vector_store_dep, dict) and vector_store_dep.get('type') == 'weaviate_v4':
+            collection = vector_store_dep['collection']
+            
+            # Perform similarity search using Weaviate v4 API
+            response = collection.query.near_text(
+                query=query,
+                limit=limit,
+                return_metadata=weaviate.classes.MetadataQuery(distance=True)
+            )
+            
+            results = []
+            for obj in response.objects:
+                results.append({
+                    "content": obj.properties.get("content", ""),
+                    "metadata": {
+                        "source": obj.properties.get("source", "unknown"),
+                        "filename": obj.properties.get("filename", "unknown"),
+                        "file_type": obj.properties.get("file_type", "unknown"),
+                        "ingestion_date": obj.properties.get("ingestion_date", "unknown"),
+                        "distance": obj.metadata.distance if obj.metadata else None
+                    },
+                    "source": obj.properties.get("source", "unknown")
+                })
+        else:
+            # Fallback to LangChain interface (shouldn't happen with our setup)
+            docs = vector_store_dep.similarity_search(query, k=limit)
+            
+            results = []
+            for doc in docs:
+                results.append({
+                    "content": doc.page_content,
+                    "metadata": doc.metadata,
+                    "source": doc.metadata.get("source", "unknown")
+                })
         
         return {
             "query": query,

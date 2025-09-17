@@ -24,7 +24,7 @@ from sqlalchemy import create_engine, text
 from dotenv import load_dotenv
 import weaviate
 from langchain_community.vectorstores import Weaviate
-from langchain_community.embeddings import OpenAIEmbeddings
+from langchain_openai import OpenAIEmbeddings
 from langchain_community.document_loaders import PyPDFLoader
 from langchain.text_splitter import CharacterTextSplitter
 from langchain.schema import Document
@@ -441,27 +441,60 @@ class ChatbotInitializer:
                 
                 logger.info(f"📝 Split into {len(split_docs)} chunks")
                 
-                # Create Weaviate vector store using v4 compatible method
-                # First, check if collection exists and delete it if it does
+                # Create Weaviate collection using v4 API directly
                 try:
-                    existing_collection = weaviate_client.collections.get("PDFReports")
-                    if existing_collection:
+                    # Check if collection exists and delete it if it does
+                    if weaviate_client.collections.exists("PDFReports"):
                         logger.info("📝 Deleting existing PDFReports collection...")
                         weaviate_client.collections.delete("PDFReports")
                         logger.info("✅ Deleted existing collection")
-                except:
-                    # Collection doesn't exist, which is fine
-                    pass
+                except Exception as e:
+                    logger.info(f"📝 Collection doesn't exist or error checking: {str(e)}")
                 
-                # Create new vector store
-                vector_store = Weaviate.from_documents(
-                    split_docs, 
-                    embeddings, 
-                    client=weaviate_client,
-                    index_name="PDFReports",
-                    text_key="content"
-                )
-                logger.info("✅ Weaviate vector store created successfully")
+                # Create collection with proper v4 schema
+                try:
+                    collection = weaviate_client.collections.create(
+                        name="PDFReports",
+                        properties=[
+                            weaviate.classes.Property(name="content", data_type=weaviate.classes.DataType.TEXT),
+                            weaviate.classes.Property(name="source", data_type=weaviate.classes.DataType.TEXT),
+                            weaviate.classes.Property(name="filename", data_type=weaviate.classes.DataType.TEXT),
+                            weaviate.classes.Property(name="file_type", data_type=weaviate.classes.DataType.TEXT),
+                            weaviate.classes.Property(name="ingestion_date", data_type=weaviate.classes.DataType.TEXT),
+                        ],
+                        vectorizer_config=weaviate.classes.Configure.Vectorizer.text2vec_openai(
+                            model="text-embedding-ada-002"
+                        )
+                    )
+                    logger.info("✅ Created PDFReports collection")
+                except Exception as e:
+                    logger.error(f"❌ Failed to create collection: {str(e)}")
+                    raise
+                
+                # Add documents to collection
+                logger.info("📝 Adding documents to Weaviate collection...")
+                batch_size = 10
+                for i in range(0, len(split_docs), batch_size):
+                    batch_docs = split_docs[i:i + batch_size]
+                    objects = []
+                    
+                    for doc in batch_docs:
+                        obj = {
+                            "content": doc.page_content,
+                            "source": doc.metadata.get("source", ""),
+                            "filename": doc.metadata.get("filename", ""),
+                            "file_type": doc.metadata.get("file_type", ""),
+                            "ingestion_date": doc.metadata.get("ingestion_date", ""),
+                        }
+                        objects.append(obj)
+                    
+                    try:
+                        collection.data.insert_many(objects)
+                        logger.info(f"✅ Inserted batch {i//batch_size + 1}/{(len(split_docs) + batch_size - 1)//batch_size}")
+                    except Exception as e:
+                        logger.warning(f"⚠️ Failed to insert batch: {str(e)}")
+                
+                logger.info("✅ Weaviate vector store created and populated successfully")
                 
                 weaviate_client.close()
                 

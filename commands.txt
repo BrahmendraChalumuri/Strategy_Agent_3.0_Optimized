@@ -20,3 +20,45 @@ docker volume prune -f
 
 Recreate using your docker-compose
 docker-compose -f docker-compose.weaviate.yml up -d
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+Fix Weaviate v4 API compatibility issues in LangChain integration
+Update to use langchain-openai instead of deprecated OpenAIEmbeddings
+Test the fixed Weaviate v4 implementation
+
+
+issue 
+2025-09-16 13:27:12,928 - INFO - 📝 Split into 28 chunks
+2025-09-16 13:27:13,082 - ERROR - ❌ Vector store creation failed: 'WeaviateClient' object has no attribute 'schema'
+2025-09-16 13:27:13,083 - ERROR - ❌ Weaviate vector store setup failed: Failed to create Weaviate vector store: 'WeaviateClient' object has no attribute 'schema'
+2025-09-16 13:27:13,084 - ERROR - ❌ Vector store initialization failed: Weaviate vector store setup failed: Failed to create Weaviate vector store: 'WeaviateClient' object has no attribute 'schema'
+2025-09-16 13:27:13,084 - ERROR - ❌ Initialization failed
+
+❌ Initialization failed
+(venv) azureuser@IALVM2:~/strategy_agent_4.0/Strategy_Agent_3.0_Optimized$ python check_weaviate_store.py
