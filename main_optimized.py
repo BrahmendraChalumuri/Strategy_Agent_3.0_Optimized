@@ -92,9 +92,9 @@ class OptimizedRecommendationEngine:
         # Load or create embeddings with persistence
         self._load_or_create_embeddings()
         
-        # Perplexity API configuration
-        self.perplexity_api_key = os.getenv('PERPLEXITY_API_KEY')
-        self.perplexity_url = "https://api.perplexity.ai/chat/completions"
+        # OpenAI GPT API configuration
+        self.openai_api_key = os.getenv('OPENAI_API_KEY')
+        self.openai_url = "https://api.openai.com/v1/chat/completions"
         
         # Performance tracking
         self.performance_stats = {
@@ -223,12 +223,12 @@ class OptimizedRecommendationEngine:
         
         logger.info(f"✅ Created embedding matrix: {self.product_embedding_matrix.shape}")
     
-    async def query_perplexity_api_async(self, session: aiohttp.ClientSession, 
+    async def query_openai_api_async(self, session: aiohttp.ClientSession, 
                                        ingredient: str, product_name: str, 
                                        catalogue_item_name: str, catalogue_category: str, 
                                        catalogue_description: str, catalogue_ingredients: str) -> Tuple[bool, str]:
-        """Async Perplexity API query with rate limiting and exponential backoff"""
-        if not self.perplexity_api_key:
+        """Async OpenAI GPT API query with rate limiting and exponential backoff"""
+        if not self.openai_api_key:
             logger.info(f"🔍 Potential match (API key missing): {ingredient} → {product_name}")
             return True, "API key missing - defaulting to True"
         
@@ -259,12 +259,12 @@ Example: "Biscuit Dough" in a chocolate chip cookie recipe refers to cookie doug
 Please answer with ONLY "YES" or "NO" followed by brief reasoning focusing on real culinary compatibility (max 50 words)."""
             
             headers = {
-                "Authorization": f"Bearer {self.perplexity_api_key}",
+                "Authorization": f"Bearer {self.openai_api_key}",
                 "Content-Type": "application/json"
             }
             
             data = {
-                "model": "sonar",
+                "model": "gpt-4",
                 "messages": [{"role": "user", "content": prompt}],
                 "max_tokens": 100,
                 "temperature": 0.1
@@ -273,7 +273,7 @@ Please answer with ONLY "YES" or "NO" followed by brief reasoning focusing on re
             # Reduced timeout for better performance
             timeout = aiohttp.ClientTimeout(total=15)
             
-            async with session.post(self.perplexity_url, headers=headers, json=data, timeout=timeout) as response:
+            async with session.post(self.openai_url, headers=headers, json=data, timeout=timeout) as response:
                 if response.status == 200:
                     result = await response.json()
                     ai_response = result['choices'][0]['message']['content'].strip()
@@ -295,7 +295,7 @@ Please answer with ONLY "YES" or "NO" followed by brief reasoning focusing on re
                     logger.warning(f"      ⚠️  Rate limit exceeded (429), waiting {retry_after}s...")
                     await asyncio.sleep(retry_after + random.uniform(1, 5))  # Add jitter
                     # Retry the request once
-                    async with session.post(self.perplexity_url, headers=headers, json=data, timeout=timeout) as retry_response:
+                    async with session.post(self.openai_url, headers=headers, json=data, timeout=timeout) as retry_response:
                         if retry_response.status == 200:
                             result = await retry_response.json()
                             ai_response = result['choices'][0]['message']['content'].strip()
@@ -508,7 +508,7 @@ Please answer with ONLY "YES" or "NO" followed by brief reasoning focusing on re
             # Create tasks for parallel API calls
             tasks = []
             for match in matches:
-                task = self.query_perplexity_api_async(
+                task = self.query_openai_api_async(
                     session, match['ingredient'], match['product_name'],
                     catalogue_item_name, catalogue_category, catalogue_description, catalogue_ingredients
                 )

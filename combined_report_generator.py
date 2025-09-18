@@ -21,7 +21,7 @@ class CombinedReportGenerator:
     def __init__(self):
         self.styles = getSampleStyleSheet()
         self.setup_custom_styles()
-        self.perplexity_api_key = os.getenv('PERPLEXITY_API_KEY')
+        self.openai_api_key = os.getenv('OPENAI_API_KEY')
         
         # Set up matplotlib style for professional charts
         plt.style.use('seaborn-v0_8-whitegrid')
@@ -93,16 +93,16 @@ class CombinedReportGenerator:
             print(f"❌ Invalid JSON format in file: {json_file_path}")
             return None
     
-    def call_perplexity_api(self, prompt, max_tokens=500):
-        """Call Perplexity API to generate content"""
+    def call_openai_api(self, prompt, max_tokens=500):
+        """Call OpenAI GPT API to generate content"""
         try:
             headers = {
-                'Authorization': f'Bearer {self.perplexity_api_key}',
+                'Authorization': f'Bearer {self.openai_api_key}',
                 'Content-Type': 'application/json'
             }
             
             payload = {
-                'model': 'sonar',
+                'model': 'gpt-4',
                 'messages': [
                     {
                         'role': 'system',
@@ -118,7 +118,7 @@ class CombinedReportGenerator:
             }
             
             response = requests.post(
-                'https://api.perplexity.ai/chat/completions',
+                'https://api.openai.com/v1/chat/completions',
                 headers=headers,
                 json=payload,
                 timeout=30
@@ -128,15 +128,15 @@ class CombinedReportGenerator:
                 result = response.json()
                 return result['choices'][0]['message']['content'].strip()
             else:
-                print(f"❌ Perplexity API error: {response.status_code} - {response.text}")
+                print(f"❌ OpenAI API error: {response.status_code} - {response.text}")
                 return None
                 
         except Exception as e:
-            print(f"❌ Error calling Perplexity API: {str(e)}")
+            print(f"❌ Error calling OpenAI API: {str(e)}")
             return None
     
     def generate_combined_executive_summary_with_api(self, all_customers_data):
-        """Generate combined executive summary using Perplexity API"""
+        """Generate combined executive summary using OpenAI GPT API"""
         try:
             # Prepare comprehensive data for the prompt
             total_customers = len(all_customers_data)
@@ -202,7 +202,7 @@ class CombinedReportGenerator:
             Focus on the most critical portfolio insights only.
             """
             
-            api_result = self.call_perplexity_api(prompt, max_tokens=400)
+            api_result = self.call_openai_api(prompt, max_tokens=400)
             
             if api_result:
                 return api_result

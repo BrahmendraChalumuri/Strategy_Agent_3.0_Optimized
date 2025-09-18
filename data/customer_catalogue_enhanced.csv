@@ -1,121 +1,121 @@
 CustomerCatalogueItemID,CustomerID,ProductName,Product Category,Description,Ingredients,QuantityRequired
-CC001,C001,Cool Lime Starbucks Refreshers™ Beverage,Refreshers,Refreshing lime and mint beverage,"Water, lime juice, mint extract, natural flavors, green coffee bean extract, citric acid",5000
-CC002,C001,Ombré Pink Drink,Refreshers,Pink coconut milk with strawberry acai,"Water, strawberry acai base, coconut milk, freeze-dried strawberries, natural flavors",300
-CC003,C001,Pink Drink,Refreshers,Strawberry acai with coconut milk,"Water, strawberry acai base, coconut milk, freeze-dried strawberries, natural flavors",200
-CC004,C001,Strawberry Acai Starbucks Refreshers™ Beverage,Refreshers,Refreshing strawberry acai beverage,"Water, strawberry acai base, coconut milk, freeze-dried strawberries, natural flavors",400
-CC005,C001,Very Berry Hibiscus Starbucks Refreshers™ Beverage,Refreshers,Refreshing berry hibiscus beverage,"Water, hibiscus tea, berry blend, natural flavors, green coffee bean extract",600
-CC006,C001,Violet Drink,Refreshers,Passion tango tea with soy milk,"Water, passion tango tea, soy milk, vanilla syrup, natural flavors",250
-CC007,C001,Evolution Fresh™ Cold-Pressed Apple Berry Juice,Cold-Pressed Juices,Cold-pressed apple and berry juice,"Apple juice, mixed berry juice, natural flavors",300
-CC008,C001,Evolution Fresh™ Defense Up,Cold-Pressed Juices,Immunity boosting cold-pressed juice,"Apple juice, orange juice, ginger, turmeric, cayenne pepper, natural flavors",150
-CC009,C001,Evolution Fresh™ Organic Ginger Limeade,Cold-Pressed Juices,Organic ginger and lime beverage,"Water, ginger juice, lime juice, organic cane sugar, natural flavors",200
-CC010,C001,Iced Coffee,Iced Coffee,Chilled brewed coffee,"Coffee, water, sugar",300
-CC011,C001,Iced Coffee with Milk,Iced Coffee,Chilled coffee with milk,"Coffee, water, milk, sugar",800
-CC012,C001,Iced Espresso Classics - Vanilla Latte,Espresso Drinks,Iced vanilla latte with espresso,"Espresso, milk, vanilla syrup, sugar",1000
-CC013,C001,Iced Espresso Classics - Caffe Mocha,Espresso Drinks,Iced mocha with espresso and chocolate,"Espresso, milk, chocolate syrup, cocoa powder, sugar",400
-CC014,C001,Iced Espresso Classics - Caramel Macchiato,Espresso Drinks,Iced caramel macchiato with espresso,"Espresso, milk, caramel syrup, vanilla syrup, sugar",300
-CC015,C001,Starbucks® Caramel Iced Coffee,Iced Coffee,Iced coffee with caramel flavor,"Coffee, water, milk, caramel syrup, natural flavors",500
-CC016,C001,Starbucks® Iced Coffee + Milk,Iced Coffee,Iced coffee with milk,"Coffee, water, milk, sugar",400
-CC017,C001,Starbucks® Low Calorie Iced Coffee + Milk,Iced Coffee,Low calorie iced coffee with milk,"Coffee, water, milk, sugar",300
-CC018,C001,Starbucks® Vanilla Iced Coffee,Iced Coffee,Iced coffee with vanilla flavor,"Coffee, water, milk, vanilla syrup, natural flavors",250
-CC019,C001,Shaken Sweet Tea,Tea,Sweetened iced tea,"Black tea, sugar, water",200
-CC020,C001,Tazo® Bottled Berry Blossom White,Tea,Bottled white tea with berry blossom,"White tea, berry flavoring, natural flavors",150
-CC021,C001,Tazo® Bottled Black Mango,Tea,Bottled black tea with mango,"Black tea, mango flavoring, natural flavors",200
-CC022,C001,Tazo® Bottled Black with Lemon,Tea,Bottled black tea with lemon,"Black tea, lemon juice, natural flavors",300
-CC023,C001,Tazo® Bottled Brambleberry,Tea,Bottled berry tea blend,"Black tea, blackberry flavoring, natural berry flavors",400
-CC024,C001,Tazo® Bottled Giant Peach,Tea,Bottled tea with peach flavor,"Black tea, peach flavoring, natural flavors",250
-CC025,C001,Tazo® Bottled Iced Passion,Tea,Bottled passion fruit tea,"Passion fruit tea, hibiscus, natural flavors",180
-CC026,C002,Hamburger,Sandwiches,Classic hamburger with beef patty,"Beef patty, onions, pickles, ketchup, mustard, sesame seed bun",800
-CC027,C002,Cheeseburger,Sandwiches,Classic cheeseburger with American cheese,"Beef patty, American cheese, onions, pickles, ketchup, mustard, sesame seed bun",600
-CC028,C002,Double Cheeseburger,Sandwiches,Double beef patties with cheese,"Two beef patties, American cheese, onions, pickles, ketchup, mustard, sesame seed bun",500
-CC029,C002,Quarter Pounder®,Sandwiches,Quarter pound beef patty burger,"Quarter pound beef patty, onions, pickles, ketchup, mustard, sesame seed bun",700
-CC030,C002,Quarter Pounder® with Cheese,Sandwiches,Quarter pound beef patty with cheese,"Quarter pound beef patty, American cheese, onions, pickles, ketchup, mustard, sesame seed bun",600
-CC031,C002,Double Quarter Pounder® with Cheese,Sandwiches,Double quarter pound beef patties with cheese,"Two quarter pound beef patties, American cheese, onions, pickles, ketchup, mustard, sesame seed bun",400
-CC032,C002,Big Mac®,Sandwiches,Iconic Big Mac with special sauce,"Two beef patties, special sauce, lettuce, cheese, pickles, onions, sesame seed bun",300
-CC033,C002,Big N' Tasty®,Sandwiches,Quarter pound beef with fresh vegetables,"Quarter pound beef patty, lettuce, tomato, onions, mayo, sesame seed bun",1000
-CC034,C002,Big N' Tasty® with Cheese,Sandwiches,Quarter pound beef with cheese and fresh vegetables,"Quarter pound beef patty, American cheese, lettuce, tomato, onions, mayo, sesame seed bun",800
-CC035,C002,Filet-O-Fish®,Sandwiches,Breaded fish fillet sandwich,"Fish fillet, tartar sauce, American cheese, steamed bun",1200
-CC036,C002,McChicken ®,Sandwiches,Crispy chicken sandwich,"Chicken patty, lettuce, mayo, bun",300
-CC037,C002,McRib ®,Sandwiches,Barbecue pork sandwich,"Pork patty, barbecue sauce, onions, pickles, bun",400
-CC038,C002,Prem. Grilled Chicken Classic Sandwich,Sandwiches,Chicken sandwich - Prem. Grilled Chicken Classic Sandwich,"Grilled chicken breast, lettuce, tomato, bun, sauce",500
-CC039,C002,Prem. Crispy Chicken Classic Sandwich,Sandwiches,Chicken sandwich - Prem. Crispy Chicken Classic Sandwich,"Crispy chicken breast, lettuce, mayo, bun",600
-CC040,C002,Prem. Grilled Chicken Club Sandwich,Sandwiches,Chicken sandwich - Prem. Grilled Chicken Club Sandwich,"Grilled chicken breast, lettuce, tomato, bun, sauce",500
-CC041,C002,Prem. Crispy Chicken Club Sandwich,Sandwiches,Chicken sandwich - Prem. Crispy Chicken Club Sandwich,"Crispy chicken breast, lettuce, mayo, bun",700
-CC042,C002,Prem. Grilled Chicken Ranch BLT Sandwich,Sandwiches,Chicken sandwich - Prem. Grilled Chicken Ranch BLT Sandwich,"Grilled chicken breast, lettuce, tomato, bun, sauce",600
-CC043,C002,Prem. Crispy Chicken Ranch BLT Sandwich,Sandwiches,Chicken sandwich - Prem. Crispy Chicken Ranch BLT Sandwich,"Crispy chicken breast, lettuce, mayo, bun",400
-CC044,C002,Southern Style Crispy Chicken Sandwich,Sandwiches,Chicken sandwich - Southern Style Crispy Chicken Sandwich,"Crispy chicken breast, lettuce, mayo, bun",900
-CC045,C002,Ranch Snack Wrap® (Crispy),Sandwiches,Chicken wrap - Ranch Snack Wrap® (Crispy),"Tortilla, chicken, lettuce, cheese, sauce",1100
-CC046,C002,Ranch Snack Wrap® (Grilled),Sandwiches,Chicken wrap - Ranch Snack Wrap® (Grilled),"Tortilla, chicken, lettuce, cheese, sauce",600
-CC047,C002,Honey Mustard Snack Wrap® (Crispy),Sandwiches,Chicken wrap - Honey Mustard Snack Wrap® (Crispy),"Tortilla, chicken, lettuce, cheese, sauce",500
-CC048,C002,Honey Mustard Snack Wrap® (Grilled),Sandwiches,Chicken wrap - Honey Mustard Snack Wrap® (Grilled),"Tortilla, chicken, lettuce, cheese, sauce",500
-CC049,C002,Chipotle BBQ Snack Wrap® (Crispy),Sandwiches,Chicken wrap - Chipotle BBQ Snack Wrap® (Crispy),"Tortilla, chicken, lettuce, cheese, sauce",400
-CC050,C002,Chipotle BBQ Snack Wrap® (Grilled),Sandwiches,Chicken wrap - Chipotle BBQ Snack Wrap® (Grilled),"Tortilla, chicken, lettuce, cheese, sauce",400
-CC051,C002,Happy Meal® with Hamburger,Happy Meals®,Kids meal - Happy Meal® with Hamburger,"Beef patty, bun, ketchup, pickles, apple slices, milk",700
-CC052,C002,Happy Mea®l with Cheeseburger,Happy Meals®,Kids meal - Happy Mea®l with Cheeseburger,"Beef patty, cheese, bun, ketchup, pickles, apple slices, milk",800
-CC053,C002,Happy Meal® with 4 pc Chicken McNuggets,Happy Meals®,Kids meal - Happy Meal® with 4 pc Chicken McNuggets,"Chicken nuggets, apple slices, milk, toy",500
-CC054,C002,Mighty Kids Meal® with 6 pc Chicken McNuggets,Mighty Kids Meals®,Kids meal - Mighty Kids Meal® with 6 pc Chicken McNuggets,"Chicken nuggets, apple slices, milk, toy",400
-CC055,C002,Mighty Kids Meal® with Double Cheeseburger,Mighty Kids Meals®,Kids meal - Mighty Kids Meal® with Double Cheeseburger,"Beef patty, cheese, bun, ketchup, pickles, apple slices, milk",500
-CC056,C003,Great Value Deluxe Mixed Nuts 30 oz,Snack Nuts,Salted mixed nuts,Almonds; Cashews; Peanuts; Pecans; Salt,1000
-CC057,C003,Great Value Mountain Lightning Citrus‑Flavored Soda,Soft Drink,Budget citrus‑flavored soda,Carbonated water; High fructose corn syrup; Citric acid; Natural and artificial flavors; Sodium benzoate,800
-CC058,C003,Purina Beyond Salmon & Brown Rice Cat Food,Pet Food,"Real salmon with oatmeal, cranberries & added omegas",Salmon; Brown rice; Oatmeal; Dried beet pulp; Cranberries; Fish oil; Vitamins & minerals,600
-CC059,C003,Limited Ingredient Real Rabbit Wet Dog Food,Pet Food,"Grain‑free wet dog food, no common allergens",Rabbit; Rabbit broth; Pea protein; Tapioca starch; Natural flavors,500
-CC060,C003,Great Value Pure Granulated Sugar 4 lb,Baking Ingredient,Enriched all‑purpose granulated sugar,Sugar,400
-CC061,C003,Dr. Oetker Baking Powder 0.5 oz (6‑pack),Baking Ingredient,Leavening agent for baking,Sodium acid pyrophosphate; Sodium bicarbonate; Corn starch; Monocalcium phosphate,600
-CC062,C003,Dr. Oetker Natural Vanilla Sugar,Snack & Baking,Vanilla flavored sugar crystals,Sugar; Natural flavor (vanilla),500
-CC063,C003,Alpine Spiced Cider Powder Drink Mix,Soft Drink Mix,Apple‑cider powdered drink mix,Sugar; Citric acid; Natural flavors; Malic acid; Spices; FD&C coloring,400
-CC064,C003,Dole Tropical Drink Mix (Sugar‑Free),Soft Drink Mix,Peach mango & strawberry‑pineapple drink mix,Erythritol; Malic acid; Natural flavors; Citric acid; Sucralose; Artificial colors,300
-CC065,C003,Great Value All‑Purpose Flour 5 lb,Baking Ingredient,Enriched all‑purpose wheat flour,"Enriched wheat flour (bleached): niacin, iron, thiamine, riboflavin, folic acid",400
-CC066,C003,Great Value Deluxe Mixed Nuts 30 oz,Snack Nuts,Salted mixed nuts,Almonds; Cashews; Peanuts; Pecans; Salt,500
-CC067,C003,Great Value Mountain Lightning Citrus‑Flavored Soda,Soft Drink,Budget citrus‑flavored soda,Carbonated water; High fructose corn syrup; Citric acid; Natural and artificial flavors; Sodium benzoate,250
-CC068,C003,Purina Beyond Salmon & Brown Rice Cat Food,Pet Food,"Real salmon with oatmeal, cranberries & added omegas",Salmon; Brown rice; Oatmeal; Dried beet pulp; Cranberries; Fish oil; Vitamins & minerals,180
-CC069,C003,Limited Ingredient Real Rabbit Wet Dog Food,Pet Food,"Grain‑free wet dog food, no common allergens",Rabbit; Rabbit broth; Pea protein; Tapioca starch; Natural flavors,900
-CC070,C003,Great Value Pure Granulated Sugar 4 lb,Baking Ingredient,Enriched all‑purpose granulated sugar,Sugar,600
-CC071,C003,Dr. Oetker Baking Powder 0.5 oz (6‑pack),Baking Ingredient,Leavening agent for baking,Sodium acid pyrophosphate; Sodium bicarbonate; Corn starch; Monocalcium phosphate,500
-CC072,C003,Dr. Oetker Natural Vanilla Sugar,Snack & Baking,Vanilla flavored sugar crystals,Sugar; Natural flavor (vanilla),400
-CC073,C003,Alpine Spiced Cider Powder Drink Mix,Soft Drink Mix,Apple‑cider powdered drink mix,Sugar; Citric acid; Natural flavors; Malic acid; Spices; FD&C coloring,600
-CC074,C003,Dole Tropical Drink Mix (Sugar‑Free),Soft Drink Mix,Peach mango & strawberry‑pineapple drink mix,Erythritol; Malic acid; Natural flavors; Citric acid; Sucralose; Artificial colors,500
-CC075,C003,Great Value All‑Purpose Flour 5 lb,Baking Ingredient,Enriched all‑purpose wheat flour,"Enriched wheat flour (bleached): niacin, iron, thiamine, riboflavin, folic acid",400
-CC076,C003,Great Value Deluxe Mixed Nuts 30 oz,Snack Nuts,Salted mixed nuts,Almonds; Cashews; Peanuts; Pecans; Salt,300
-CC077,C003,Great Value Mountain Lightning Citrus‑Flavored Soda,Soft Drink,Budget citrus‑flavored soda,Carbonated water; High fructose corn syrup; Citric acid; Natural and artificial flavors; Sodium benzoate,400
-CC078,C003,Purina Beyond Salmon & Brown Rice Cat Food,Pet Food,"Real salmon with oatmeal, cranberries & added omegas",Salmon; Brown rice; Oatmeal; Dried beet pulp; Cranberries; Fish oil; Vitamins & minerals,500
-CC079,C003,Limited Ingredient Real Rabbit Wet Dog Food,Pet Food,"Grain‑free wet dog food, no common allergens",Rabbit; Rabbit broth; Pea protein; Tapioca starch; Natural flavors,250
-CC080,C003,Great Value Pure Granulated Sugar 4 lb,Baking Ingredient,Enriched all‑purpose granulated sugar,Sugar,180
-CC081,C003,Dr. Oetker Baking Powder 0.5 oz (6‑pack),Baking Ingredient,Leavening agent for baking,Sodium acid pyrophosphate; Sodium bicarbonate; Corn starch; Monocalcium phosphate,700
-CC082,C003,Dr. Oetker Natural Vanilla Sugar,Snack & Baking,Vanilla flavored sugar crystals,Sugar; Natural flavor (vanilla),500
-CC083,C003,Alpine Spiced Cider Powder Drink Mix,Soft Drink Mix,Apple‑cider powdered drink mix,Sugar; Citric acid; Natural flavors; Malic acid; Spices; FD&C coloring,400
-CC084,C003,Dole Tropical Drink Mix (Sugar‑Free),Soft Drink Mix,Peach mango & strawberry‑pineapple drink mix,Erythritol; Malic acid; Natural flavors; Citric acid; Sucralose; Artificial colors,300
-CC085,C003,Great Value All‑Purpose Flour 5 lb,Baking Ingredient,Enriched all‑purpose wheat flour,"Enriched wheat flour (bleached): niacin, iron, thiamine, riboflavin, folic acid",500
-CC086,C003,Great Value Deluxe Mixed Nuts 30 oz,Snack Nuts,Salted mixed nuts,Almonds; Cashews; Peanuts; Pecans; Salt,400
-CC087,C003,Great Value Mountain Lightning Citrus‑Flavored Soda,Soft Drink,Budget citrus‑flavored soda,Carbonated water; High fructose corn syrup; Citric acid; Natural and artificial flavors; Sodium benzoate,400
-CC088,C003,Purina Beyond Salmon & Brown Rice Cat Food,Pet Food,"Real salmon with oatmeal, cranberries & added omegas",Salmon; Brown rice; Oatmeal; Dried beet pulp; Cranberries; Fish oil; Vitamins & minerals,250
-CC089,C003,Limited Ingredient Real Rabbit Wet Dog Food,Pet Food,"Grain‑free wet dog food, no common allergens",Rabbit; Rabbit broth; Pea protein; Tapioca starch; Natural flavors,300
-CC090,C003,Great Value Pure Granulated Sugar 4 lb,Baking Ingredient,Enriched all‑purpose granulated sugar,Sugar,350
-CC091,C003,Dr. Oetker Baking Powder 0.5 oz (6‑pack),Baking Ingredient,Leavening agent for baking,Sodium acid pyrophosphate; Sodium bicarbonate; Corn starch; Monocalcium phosphate,250
-CC092,C003,Dr. Oetker Natural Vanilla Sugar,Snack & Baking,Vanilla flavored sugar crystals,Sugar; Natural flavor (vanilla),300
-CC093,C003,Alpine Spiced Cider Powder Drink Mix,Soft Drink Mix,Apple‑cider powdered drink mix,Sugar; Citric acid; Natural flavors; Malic acid; Spices; FD&C coloring,700
-CC094,C003,Dole Tropical Drink Mix (Sugar‑Free),Soft Drink Mix,Peach mango & strawberry‑pineapple drink mix,Erythritol; Malic acid; Natural flavors; Citric acid; Sucralose; Artificial colors,500
-CC095,C003,Great Value All‑Purpose Flour 5 lb,Baking Ingredient,Enriched all‑purpose wheat flour,"Enriched wheat flour (bleached): niacin, iron, thiamine, riboflavin, folic acid",400
-CC096,C003,Great Value Deluxe Mixed Nuts 30 oz,Snack Nuts,Salted mixed nuts,Almonds; Cashews; Peanuts; Pecans; Salt,300
-CC097,C003,Great Value Mountain Lightning Citrus‑Flavored Soda,Soft Drink,Budget citrus‑flavored soda,Carbonated water; High fructose corn syrup; Citric acid; Natural and artificial flavors; Sodium benzoate,500
-CC098,C003,Purina Beyond Salmon & Brown Rice Cat Food,Pet Food,"Real salmon with oatmeal, cranberries & added omegas",Salmon; Brown rice; Oatmeal; Dried beet pulp; Cranberries; Fish oil; Vitamins & minerals,400
-CC099,C003,Limited Ingredient Real Rabbit Wet Dog Food,Pet Food,"Grain‑free wet dog food, no common allergens",Rabbit; Rabbit broth; Pea protein; Tapioca starch; Natural flavors,400
-CC100,C003,Great Value Pure Granulated Sugar 4 lb,Baking Ingredient,Enriched all‑purpose granulated sugar,Sugar,250
-CC101,C001,Starbucks® Chocolate Chip Cookie,Cookies,Premium chocolate chip cookies,"Biscuit Dough, Chocolate chips, Sugar, Vanilla extract, Eggs, Butter",800
-CC102,C001,Starbucks® Vanilla Sugar Cookie,Cookies,Premium vanilla sugar cookies,"Biscuit Dough, Sugar, Vanilla extract, Eggs, Butter",600
-CC103,C001,Starbucks® Buttermilk Biscuit,Biscuits,Traditional buttermilk biscuits,"Biscuit Dough, Buttermilk, Butter, Salt",400
-CC104,C002,McDonald's® Sausage Gravy Biscuit,Biscuits,Sausage gravy with biscuits,"Sausage Gravy,Biscuit Dough, Sausage, Black pepper",1200
-CC105,C002,McDonald's® Country Style Gravy,Biscuits,Country style gravy for biscuits,"Gravy Mix, Milk, Butter, Flour, Black pepper",900
-CC106,C002,McDonald's® Brown Gravy,Biscuits,Brown gravy for sandwiches,"Brown Gravy Mix, Water, Beef stock, Onion powder, Garlic powder",700
-CC107,C003,Walmart® Chocolate Chip Cookie Mix,Baking Mixes,Chocolate chip cookie mix," Biscuit Mix, Chocolate chips, Sugar, Vanilla extract, Eggs",500
-CC108,C003,Walmart® Vanilla Sugar Cookie Mix,Baking Mixes,Vanilla sugar cookie mix," Biscuit Mix, Sugar, Vanilla extract, Eggs, Butter",400
-CC109,C001,Starbucks® Cheddar Cheese Sauce,Sauces,Cheddar cheese sauce for sandwiches," Cheddar Cheese Sauce Mix, Milk, Butter, Flour, Cheddar cheese",300
-CC110,C002,McDonald's® Nacho Cheese Sauce,Sauces,Nacho cheese sauce for nachos," Nacho Cheese Sauce Mix, Milk, Butter, Jalapeños, Spices",600
-CC111,C003,Walmart® Alfredo Sauce Mix,Sauces,Alfredo sauce mix for pasta," Alfredo Sauce Mix, Milk, Butter, Parmesan cheese, Garlic",400
-CC112,C001,Starbucks® Chocolate Brownie,Desserts,Chocolate brownies," Chocolate Brownie Mix, Eggs, Oil, Water, Chocolate chips",300
-CC113,C002,McDonald's® French Doughnut,Desserts,French doughnuts," French Doughnut and Sopaipilla Mix, Eggs, Milk, Oil, Sugar",500
-CC114,C003,Walmart® Sopapilla Mix,Desserts,Sopapilla mix for Mexican pastries,"Morrison's® Sopapilla Mix, Eggs, Milk, Oil, Cinnamon sugar",400
-CC115,C001,Starbucks® Cornbread,Bread,Cornbread for breakfast," Cornbread Mix, Eggs, Milk, Oil, Sugar",600
-CC116,C002,McDonald's® Pancake Mix,Breakfast,Pancake mix for breakfast," Buttermilk Pancake & Waffle Mix, Eggs, Milk, Oil, Vanilla",800
-CC117,C003,Walmart® Waffle Mix,Breakfast,Waffle mix for breakfast," Western Style Buttermilk Pancake & Waffle Mix, Eggs, Milk, Oil, Sugar",500
-CC118,C001,Starbucks® Pizza Dough,Pizza,Pizza dough for sandwiches,"Great American Pizza Dough Mix - No Yeast, Water, Oil, Salt, Sugar",400
-CC119,C002,McDonald's® Tortilla Mix,Tortillas,Tortilla mix for wraps," White Wings Flour Tortilla Mix, Water, Oil, Salt",600
-CC120,C003,Walmart® Flour Tortilla,Tortillas,Flour tortillas for Mexican food,"Conestoga™ Tortilla Pre-Mix, Water, Oil, Salt, Sugar",700
+CC001,C001,Cool Lime Starbucks Refreshers™ Beverage,Refreshers,Refreshing lime and mint beverage,"Water, lime juice, mint extract, natural flavors, green coffee bean extract, citric acid",5000000
+CC002,C001,Ombré Pink Drink,Refreshers,Pink coconut milk with strawberry acai,"Water, strawberry acai base, coconut milk, freeze-dried strawberries, natural flavors",300000
+CC003,C001,Pink Drink,Refreshers,Strawberry acai with coconut milk,"Water, strawberry acai base, coconut milk, freeze-dried strawberries, natural flavors",200000
+CC004,C001,Strawberry Acai Starbucks Refreshers™ Beverage,Refreshers,Refreshing strawberry acai beverage,"Water, strawberry acai base, coconut milk, freeze-dried strawberries, natural flavors",400000
+CC005,C001,Very Berry Hibiscus Starbucks Refreshers™ Beverage,Refreshers,Refreshing berry hibiscus beverage,"Water, hibiscus tea, berry blend, natural flavors, green coffee bean extract",600000
+CC006,C001,Violet Drink,Refreshers,Passion tango tea with soy milk,"Water, passion tango tea, soy milk, vanilla syrup, natural flavors",250000
+CC007,C001,Evolution Fresh™ Cold-Pressed Apple Berry Juice,Cold-Pressed Juices,Cold-pressed apple and berry juice,"Apple juice, mixed berry juice, natural flavors",300000
+CC008,C001,Evolution Fresh™ Defense Up,Cold-Pressed Juices,Immunity boosting cold-pressed juice,"Apple juice, orange juice, ginger, turmeric, cayenne pepper, natural flavors",150000
+CC009,C001,Evolution Fresh™ Organic Ginger Limeade,Cold-Pressed Juices,Organic ginger and lime beverage,"Water, ginger juice, lime juice, organic cane sugar, natural flavors",200000
+CC010,C001,Iced Coffee,Iced Coffee,Chilled brewed coffee,"Coffee, water, sugar",300000
+CC011,C001,Iced Coffee with Milk,Iced Coffee,Chilled coffee with milk,"Coffee, water, milk, sugar",800000
+CC012,C001,Iced Espresso Classics - Vanilla Latte,Espresso Drinks,Iced vanilla latte with espresso,"Espresso, milk, vanilla syrup, sugar",1000000
+CC013,C001,Iced Espresso Classics - Caffe Mocha,Espresso Drinks,Iced mocha with espresso and chocolate,"Espresso, milk, chocolate syrup, cocoa powder, sugar",400000
+CC014,C001,Iced Espresso Classics - Caramel Macchiato,Espresso Drinks,Iced caramel macchiato with espresso,"Espresso, milk, caramel syrup, vanilla syrup, sugar",300000
+CC015,C001,Starbucks® Caramel Iced Coffee,Iced Coffee,Iced coffee with caramel flavor,"Coffee, water, milk, caramel syrup, natural flavors",500000
+CC016,C001,Starbucks® Iced Coffee + Milk,Iced Coffee,Iced coffee with milk,"Coffee, water, milk, sugar",400000
+CC017,C001,Starbucks® Low Calorie Iced Coffee + Milk,Iced Coffee,Low calorie iced coffee with milk,"Coffee, water, milk, sugar",300000
+CC018,C001,Starbucks® Vanilla Iced Coffee,Iced Coffee,Iced coffee with vanilla flavor,"Coffee, water, milk, vanilla syrup, natural flavors",250000
+CC019,C001,Shaken Sweet Tea,Tea,Sweetened iced tea,"Black tea, sugar, water",200000
+CC020,C001,Tazo® Bottled Berry Blossom White,Tea,Bottled white tea with berry blossom,"White tea, berry flavoring, natural flavors",150000
+CC021,C001,Tazo® Bottled Black Mango,Tea,Bottled black tea with mango,"Black tea, mango flavoring, natural flavors",200000
+CC022,C001,Tazo® Bottled Black with Lemon,Tea,Bottled black tea with lemon,"Black tea, lemon juice, natural flavors",300000
+CC023,C001,Tazo® Bottled Brambleberry,Tea,Bottled berry tea blend,"Black tea, blackberry flavoring, natural berry flavors",400000
+CC024,C001,Tazo® Bottled Giant Peach,Tea,Bottled tea with peach flavor,"Black tea, peach flavoring, natural flavors",250000
+CC025,C001,Tazo® Bottled Iced Passion,Tea,Bottled passion fruit tea,"Passion fruit tea, hibiscus, natural flavors",180000
+CC026,C002,Hamburger,Sandwiches,Classic hamburger with beef patty,"Beef patty, onions, pickles, ketchup, mustard, sesame seed bun",800000
+CC027,C002,Cheeseburger,Sandwiches,Classic cheeseburger with American cheese,"Beef patty, American cheese, onions, pickles, ketchup, mustard, sesame seed bun",600000
+CC028,C002,Double Cheeseburger,Sandwiches,Double beef patties with cheese,"Two beef patties, American cheese, onions, pickles, ketchup, mustard, sesame seed bun",500000
+CC029,C002,Quarter Pounder®,Sandwiches,Quarter pound beef patty burger,"Quarter pound beef patty, onions, pickles, ketchup, mustard, sesame seed bun",700000
+CC030,C002,Quarter Pounder® with Cheese,Sandwiches,Quarter pound beef patty with cheese,"Quarter pound beef patty, American cheese, onions, pickles, ketchup, mustard, sesame seed bun",600000
+CC031,C002,Double Quarter Pounder® with Cheese,Sandwiches,Double quarter pound beef patties with cheese,"Two quarter pound beef patties, American cheese, onions, pickles, ketchup, mustard, sesame seed bun",400000
+CC032,C002,Big Mac®,Sandwiches,Iconic Big Mac with special sauce,"Two beef patties, special sauce, lettuce, cheese, pickles, onions, sesame seed bun",300000
+CC033,C002,Big N' Tasty®,Sandwiches,Quarter pound beef with fresh vegetables,"Quarter pound beef patty, lettuce, tomato, onions, mayo, sesame seed bun",1000000
+CC034,C002,Big N' Tasty® with Cheese,Sandwiches,Quarter pound beef with cheese and fresh vegetables,"Quarter pound beef patty, American cheese, lettuce, tomato, onions, mayo, sesame seed bun",800000
+CC035,C002,Filet-O-Fish®,Sandwiches,Breaded fish fillet sandwich,"Fish fillet, tartar sauce, American cheese, steamed bun",1200000
+CC036,C002,McChicken ®,Sandwiches,Crispy chicken sandwich,"Chicken patty, lettuce, mayo, bun",300000
+CC037,C002,McRib ®,Sandwiches,Barbecue pork sandwich,"Pork patty, barbecue sauce, onions, pickles, bun",400000
+CC038,C002,Prem. Grilled Chicken Classic Sandwich,Sandwiches,Chicken sandwich - Prem. Grilled Chicken Classic Sandwich,"Grilled chicken breast, lettuce, tomato, bun, sauce",500000
+CC039,C002,Prem. Crispy Chicken Classic Sandwich,Sandwiches,Chicken sandwich - Prem. Crispy Chicken Classic Sandwich,"Crispy chicken breast, lettuce, mayo, bun",600000
+CC040,C002,Prem. Grilled Chicken Club Sandwich,Sandwiches,Chicken sandwich - Prem. Grilled Chicken Club Sandwich,"Grilled chicken breast, lettuce, tomato, bun, sauce",500000
+CC041,C002,Prem. Crispy Chicken Club Sandwich,Sandwiches,Chicken sandwich - Prem. Crispy Chicken Club Sandwich,"Crispy chicken breast, lettuce, mayo, bun",700000
+CC042,C002,Prem. Grilled Chicken Ranch BLT Sandwich,Sandwiches,Chicken sandwich - Prem. Grilled Chicken Ranch BLT Sandwich,"Grilled chicken breast, lettuce, tomato, bun, sauce",600000
+CC043,C002,Prem. Crispy Chicken Ranch BLT Sandwich,Sandwiches,Chicken sandwich - Prem. Crispy Chicken Ranch BLT Sandwich,"Crispy chicken breast, lettuce, mayo, bun",400000
+CC044,C002,Southern Style Crispy Chicken Sandwich,Sandwiches,Chicken sandwich - Southern Style Crispy Chicken Sandwich,"Crispy chicken breast, lettuce, mayo, bun",900000
+CC045,C002,Ranch Snack Wrap® (Crispy),Sandwiches,Chicken wrap - Ranch Snack Wrap® (Crispy),"Tortilla, chicken, lettuce, cheese, sauce",1100000
+CC046,C002,Ranch Snack Wrap® (Grilled),Sandwiches,Chicken wrap - Ranch Snack Wrap® (Grilled),"Tortilla, chicken, lettuce, cheese, sauce",600000
+CC047,C002,Honey Mustard Snack Wrap® (Crispy),Sandwiches,Chicken wrap - Honey Mustard Snack Wrap® (Crispy),"Tortilla, chicken, lettuce, cheese, sauce",500000
+CC048,C002,Honey Mustard Snack Wrap® (Grilled),Sandwiches,Chicken wrap - Honey Mustard Snack Wrap® (Grilled),"Tortilla, chicken, lettuce, cheese, sauce",500000
+CC049,C002,Chipotle BBQ Snack Wrap® (Crispy),Sandwiches,Chicken wrap - Chipotle BBQ Snack Wrap® (Crispy),"Tortilla, chicken, lettuce, cheese, sauce",400000
+CC050,C002,Chipotle BBQ Snack Wrap® (Grilled),Sandwiches,Chicken wrap - Chipotle BBQ Snack Wrap® (Grilled),"Tortilla, chicken, lettuce, cheese, sauce",400000
+CC051,C002,Happy Meal® with Hamburger,Happy Meals®,Kids meal - Happy Meal® with Hamburger,"Beef patty, bun, ketchup, pickles, apple slices, milk",700000
+CC052,C002,Happy Mea®l with Cheeseburger,Happy Meals®,Kids meal - Happy Mea®l with Cheeseburger,"Beef patty, cheese, bun, ketchup, pickles, apple slices, milk",800000
+CC053,C002,Happy Meal® with 4 pc Chicken McNuggets,Happy Meals®,Kids meal - Happy Meal® with 4 pc Chicken McNuggets,"Chicken nuggets, apple slices, milk, toy",500000
+CC054,C002,Mighty Kids Meal® with 6 pc Chicken McNuggets,Mighty Kids Meals®,Kids meal - Mighty Kids Meal® with 6 pc Chicken McNuggets,"Chicken nuggets, apple slices, milk, toy",400000
+CC055,C002,Mighty Kids Meal® with Double Cheeseburger,Mighty Kids Meals®,Kids meal - Mighty Kids Meal® with Double Cheeseburger,"Beef patty, cheese, bun, ketchup, pickles, apple slices, milk",500000
+CC056,C003,Great Value Deluxe Mixed Nuts 30 oz,Snack Nuts,Salted mixed nuts,Almonds; Cashews; Peanuts; Pecans; Salt,1000000
+CC057,C003,Great Value Mountain Lightning Citrus‑Flavored Soda,Soft Drink,Budget citrus‑flavored soda,Carbonated water; High fructose corn syrup; Citric acid; Natural and artificial flavors; Sodium benzoate,800000
+CC058,C003,Purina Beyond Salmon & Brown Rice Cat Food,Pet Food,"Real salmon with oatmeal, cranberries & added omegas",Salmon; Brown rice; Oatmeal; Dried beet pulp; Cranberries; Fish oil; Vitamins & minerals,600000
+CC059,C003,Limited Ingredient Real Rabbit Wet Dog Food,Pet Food,"Grain‑free wet dog food, no common allergens",Rabbit; Rabbit broth; Pea protein; Tapioca starch; Natural flavors,500000
+CC060,C003,Great Value Pure Granulated Sugar 4 lb,Baking Ingredient,Enriched all‑purpose granulated sugar,Sugar,400000
+CC061,C003,Dr. Oetker Baking Powder 0.5 oz (6‑pack),Baking Ingredient,Leavening agent for baking,Sodium acid pyrophosphate; Sodium bicarbonate; Corn starch; Monocalcium phosphate,600000
+CC062,C003,Dr. Oetker Natural Vanilla Sugar,Snack & Baking,Vanilla flavored sugar crystals,Sugar; Natural flavor (vanilla),500000
+CC063,C003,Alpine Spiced Cider Powder Drink Mix,Soft Drink Mix,Apple‑cider powdered drink mix,Sugar; Citric acid; Natural flavors; Malic acid; Spices; FD&C coloring,400000
+CC064,C003,Dole Tropical Drink Mix (Sugar‑Free),Soft Drink Mix,Peach mango & strawberry‑pineapple drink mix,Erythritol; Malic acid; Natural flavors; Citric acid; Sucralose; Artificial colors,300000
+CC065,C003,Great Value All‑Purpose Flour 5 lb,Baking Ingredient,Enriched all‑purpose wheat flour,"Enriched wheat flour (bleached): niacin, iron, thiamine, riboflavin, folic acid",400000
+CC066,C003,Great Value Deluxe Mixed Nuts 30 oz,Snack Nuts,Salted mixed nuts,Almonds; Cashews; Peanuts; Pecans; Salt,500000
+CC067,C003,Great Value Mountain Lightning Citrus‑Flavored Soda,Soft Drink,Budget citrus‑flavored soda,Carbonated water; High fructose corn syrup; Citric acid; Natural and artificial flavors; Sodium benzoate,250000
+CC068,C003,Purina Beyond Salmon & Brown Rice Cat Food,Pet Food,"Real salmon with oatmeal, cranberries & added omegas",Salmon; Brown rice; Oatmeal; Dried beet pulp; Cranberries; Fish oil; Vitamins & minerals,180000
+CC069,C003,Limited Ingredient Real Rabbit Wet Dog Food,Pet Food,"Grain‑free wet dog food, no common allergens",Rabbit; Rabbit broth; Pea protein; Tapioca starch; Natural flavors,900000
+CC070,C003,Great Value Pure Granulated Sugar 4 lb,Baking Ingredient,Enriched all‑purpose granulated sugar,Sugar,600000
+CC071,C003,Dr. Oetker Baking Powder 0.5 oz (6‑pack),Baking Ingredient,Leavening agent for baking,Sodium acid pyrophosphate; Sodium bicarbonate; Corn starch; Monocalcium phosphate,500000
+CC072,C003,Dr. Oetker Natural Vanilla Sugar,Snack & Baking,Vanilla flavored sugar crystals,Sugar; Natural flavor (vanilla),400000
+CC073,C003,Alpine Spiced Cider Powder Drink Mix,Soft Drink Mix,Apple‑cider powdered drink mix,Sugar; Citric acid; Natural flavors; Malic acid; Spices; FD&C coloring,600000
+CC074,C003,Dole Tropical Drink Mix (Sugar‑Free),Soft Drink Mix,Peach mango & strawberry‑pineapple drink mix,Erythritol; Malic acid; Natural flavors; Citric acid; Sucralose; Artificial colors,500000
+CC075,C003,Great Value All‑Purpose Flour 5 lb,Baking Ingredient,Enriched all‑purpose wheat flour,"Enriched wheat flour (bleached): niacin, iron, thiamine, riboflavin, folic acid",400000
+CC076,C003,Great Value Deluxe Mixed Nuts 30 oz,Snack Nuts,Salted mixed nuts,Almonds; Cashews; Peanuts; Pecans; Salt,300000
+CC077,C003,Great Value Mountain Lightning Citrus‑Flavored Soda,Soft Drink,Budget citrus‑flavored soda,Carbonated water; High fructose corn syrup; Citric acid; Natural and artificial flavors; Sodium benzoate,400000
+CC078,C003,Purina Beyond Salmon & Brown Rice Cat Food,Pet Food,"Real salmon with oatmeal, cranberries & added omegas",Salmon; Brown rice; Oatmeal; Dried beet pulp; Cranberries; Fish oil; Vitamins & minerals,500000
+CC079,C003,Limited Ingredient Real Rabbit Wet Dog Food,Pet Food,"Grain‑free wet dog food, no common allergens",Rabbit; Rabbit broth; Pea protein; Tapioca starch; Natural flavors,250000
+CC080,C003,Great Value Pure Granulated Sugar 4 lb,Baking Ingredient,Enriched all‑purpose granulated sugar,Sugar,180000
+CC081,C003,Dr. Oetker Baking Powder 0.5 oz (6‑pack),Baking Ingredient,Leavening agent for baking,Sodium acid pyrophosphate; Sodium bicarbonate; Corn starch; Monocalcium phosphate,700000
+CC082,C003,Dr. Oetker Natural Vanilla Sugar,Snack & Baking,Vanilla flavored sugar crystals,Sugar; Natural flavor (vanilla),500000
+CC083,C003,Alpine Spiced Cider Powder Drink Mix,Soft Drink Mix,Apple‑cider powdered drink mix,Sugar; Citric acid; Natural flavors; Malic acid; Spices; FD&C coloring,400000
+CC084,C003,Dole Tropical Drink Mix (Sugar‑Free),Soft Drink Mix,Peach mango & strawberry‑pineapple drink mix,Erythritol; Malic acid; Natural flavors; Citric acid; Sucralose; Artificial colors,300000
+CC085,C003,Great Value All‑Purpose Flour 5 lb,Baking Ingredient,Enriched all‑purpose wheat flour,"Enriched wheat flour (bleached): niacin, iron, thiamine, riboflavin, folic acid",500000
+CC086,C003,Great Value Deluxe Mixed Nuts 30 oz,Snack Nuts,Salted mixed nuts,Almonds; Cashews; Peanuts; Pecans; Salt,400000
+CC087,C003,Great Value Mountain Lightning Citrus‑Flavored Soda,Soft Drink,Budget citrus‑flavored soda,Carbonated water; High fructose corn syrup; Citric acid; Natural and artificial flavors; Sodium benzoate,400000
+CC088,C003,Purina Beyond Salmon & Brown Rice Cat Food,Pet Food,"Real salmon with oatmeal, cranberries & added omegas",Salmon; Brown rice; Oatmeal; Dried beet pulp; Cranberries; Fish oil; Vitamins & minerals,250000
+CC089,C003,Limited Ingredient Real Rabbit Wet Dog Food,Pet Food,"Grain‑free wet dog food, no common allergens",Rabbit; Rabbit broth; Pea protein; Tapioca starch; Natural flavors,300000
+CC090,C003,Great Value Pure Granulated Sugar 4 lb,Baking Ingredient,Enriched all‑purpose granulated sugar,Sugar,350000
+CC091,C003,Dr. Oetker Baking Powder 0.5 oz (6‑pack),Baking Ingredient,Leavening agent for baking,Sodium acid pyrophosphate; Sodium bicarbonate; Corn starch; Monocalcium phosphate,250000
+CC092,C003,Dr. Oetker Natural Vanilla Sugar,Snack & Baking,Vanilla flavored sugar crystals,Sugar; Natural flavor (vanilla),300000
+CC093,C003,Alpine Spiced Cider Powder Drink Mix,Soft Drink Mix,Apple‑cider powdered drink mix,Sugar; Citric acid; Natural flavors; Malic acid; Spices; FD&C coloring,700000
+CC094,C003,Dole Tropical Drink Mix (Sugar‑Free),Soft Drink Mix,Peach mango & strawberry‑pineapple drink mix,Erythritol; Malic acid; Natural flavors; Citric acid; Sucralose; Artificial colors,500000
+CC095,C003,Great Value All‑Purpose Flour 5 lb,Baking Ingredient,Enriched all‑purpose wheat flour,"Enriched wheat flour (bleached): niacin, iron, thiamine, riboflavin, folic acid",400000
+CC096,C003,Great Value Deluxe Mixed Nuts 30 oz,Snack Nuts,Salted mixed nuts,Almonds; Cashews; Peanuts; Pecans; Salt,300000
+CC097,C003,Great Value Mountain Lightning Citrus‑Flavored Soda,Soft Drink,Budget citrus‑flavored soda,Carbonated water; High fructose corn syrup; Citric acid; Natural and artificial flavors; Sodium benzoate,500000
+CC098,C003,Purina Beyond Salmon & Brown Rice Cat Food,Pet Food,"Real salmon with oatmeal, cranberries & added omegas",Salmon; Brown rice; Oatmeal; Dried beet pulp; Cranberries; Fish oil; Vitamins & minerals,400000
+CC099,C003,Limited Ingredient Real Rabbit Wet Dog Food,Pet Food,"Grain‑free wet dog food, no common allergens",Rabbit; Rabbit broth; Pea protein; Tapioca starch; Natural flavors,400000
+CC100,C003,Great Value Pure Granulated Sugar 4 lb,Baking Ingredient,Enriched all‑purpose granulated sugar,Sugar,250000
+CC101,C001,Starbucks® Chocolate Chip Cookie,Cookies,Premium chocolate chip cookies,"Biscuit Dough, Chocolate chips, Sugar, Vanilla extract, Eggs, Butter",800000
+CC102,C001,Starbucks® Vanilla Sugar Cookie,Cookies,Premium vanilla sugar cookies,"Biscuit Dough, Sugar, Vanilla extract, Eggs, Butter",600000
+CC103,C001,Starbucks® Buttermilk Biscuit,Biscuits,Traditional buttermilk biscuits,"Biscuit Dough, Buttermilk, Butter, Salt",400000
+CC104,C002,McDonald's® Sausage Gravy Biscuit,Biscuits,Sausage gravy with biscuits,"Sausage Gravy,Biscuit Dough, Sausage, Black pepper",1200000
+CC105,C002,McDonald's® Country Style Gravy,Biscuits,Country style gravy for biscuits,"Gravy Mix, Milk, Butter, Flour, Black pepper",900000
+CC106,C002,McDonald's® Brown Gravy,Biscuits,Brown gravy for sandwiches,"Brown Gravy Mix, Water, Beef stock, Onion powder, Garlic powder",700000
+CC107,C003,Walmart® Chocolate Chip Cookie Mix,Baking Mixes,Chocolate chip cookie mix," Biscuit Mix, Chocolate chips, Sugar, Vanilla extract, Eggs",500000
+CC108,C003,Walmart® Vanilla Sugar Cookie Mix,Baking Mixes,Vanilla sugar cookie mix," Biscuit Mix, Sugar, Vanilla extract, Eggs, Butter",400000
+CC109,C001,Starbucks® Cheddar Cheese Sauce,Sauces,Cheddar cheese sauce for sandwiches," Cheddar Cheese Sauce Mix, Milk, Butter, Flour, Cheddar cheese",300000
+CC110,C002,McDonald's® Nacho Cheese Sauce,Sauces,Nacho cheese sauce for nachos," Nacho Cheese Sauce Mix, Milk, Butter, Jalapeños, Spices",600000
+CC111,C003,Walmart® Alfredo Sauce Mix,Sauces,Alfredo sauce mix for pasta," Alfredo Sauce Mix, Milk, Butter, Parmesan cheese, Garlic",400000
+CC112,C001,Starbucks® Chocolate Brownie,Desserts,Chocolate brownies," Chocolate Brownie Mix, Eggs, Oil, Water, Chocolate chips",300000
+CC113,C002,McDonald's® French Doughnut,Desserts,French doughnuts," French Doughnut and Sopaipilla Mix, Eggs, Milk, Oil, Sugar",500000
+CC114,C003,Walmart® Sopapilla Mix,Desserts,Sopapilla mix for Mexican pastries,"Morrison's® Sopapilla Mix, Eggs, Milk, Oil, Cinnamon sugar",400000
+CC115,C001,Starbucks® Cornbread,Bread,Cornbread for breakfast," Cornbread Mix, Eggs, Milk, Oil, Sugar",600000
+CC116,C002,McDonald's® Pancake Mix,Breakfast,Pancake mix for breakfast," Buttermilk Pancake & Waffle Mix, Eggs, Milk, Oil, Vanilla",800000
+CC117,C003,Walmart® Waffle Mix,Breakfast,Waffle mix for breakfast," Western Style Buttermilk Pancake & Waffle Mix, Eggs, Milk, Oil, Sugar",500000
+CC118,C001,Starbucks® Pizza Dough,Pizza,Pizza dough for sandwiches,"Great American Pizza Dough Mix - No Yeast, Water, Oil, Salt, Sugar",400000
+CC119,C002,McDonald's® Tortilla Mix,Tortillas,Tortilla mix for wraps," White Wings Flour Tortilla Mix, Water, Oil, Salt",600000
+CC120,C003,Walmart® Flour Tortilla,Tortillas,Flour tortillas for Mexican food,"Conestoga™ Tortilla Pre-Mix, Water, Oil, Salt, Sugar",700000

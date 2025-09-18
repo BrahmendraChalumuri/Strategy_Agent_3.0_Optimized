@@ -17,7 +17,7 @@ class PDFReportGenerator:
     def __init__(self):
         self.styles = getSampleStyleSheet()
         self.setup_custom_styles()
-        self.perplexity_api_key = os.getenv('PERPLEXITY_API_KEY')
+        self.openai_api_key = os.getenv('OPENAI_API_KEY')
     
     def setup_custom_styles(self):
         """Setup custom paragraph styles for the report"""
@@ -148,16 +148,16 @@ class PDFReportGenerator:
             print(f"❌ Invalid JSON format in file: {json_file_path}")
             return None
     
-    def call_perplexity_api(self, prompt, max_tokens=500):
-        """Call Perplexity API to generate content"""
+    def call_openai_api(self, prompt, max_tokens=500):
+        """Call OpenAI GPT API to generate content"""
         try:
             headers = {
-                'Authorization': f'Bearer {self.perplexity_api_key}',
+                'Authorization': f'Bearer {self.openai_api_key}',
                 'Content-Type': 'application/json'
             }
             
             payload = {
-                'model': 'sonar',
+                'model': 'gpt-4',
                 'messages': [
                     {
                         'role': 'system',
@@ -173,7 +173,7 @@ class PDFReportGenerator:
             }
             
             response = requests.post(
-                'https://api.perplexity.ai/chat/completions',
+                'https://api.openai.com/v1/chat/completions',
                 headers=headers,
                 json=payload,
                 timeout=30
@@ -183,15 +183,15 @@ class PDFReportGenerator:
                 result = response.json()
                 return result['choices'][0]['message']['content'].strip()
             else:
-                print(f"❌ Perplexity API error: {response.status_code} - {response.text}")
+                print(f"❌ OpenAI API error: {response.status_code} - {response.text}")
                 return None
                 
         except Exception as e:
-            print(f"❌ Error calling Perplexity API: {str(e)}")
+            print(f"❌ Error calling OpenAI API: {str(e)}")
             return None
     
     def generate_executive_summary_with_api(self, data):
-        """Generate Executive Summary using Perplexity API"""
+        """Generate Executive Summary using OpenAI GPT API"""
         try:
             # Extract key data for the prompt
             customer_info = data.get('CustomerInfo', {})
@@ -258,8 +258,8 @@ class PDFReportGenerator:
             Focus on the most critical information only. Avoid detailed explanations.
             """
             
-            # Call Perplexity API
-            api_result = self.call_perplexity_api(prompt, max_tokens=300)
+            # Call OpenAI API
+            api_result = self.call_openai_api(prompt, max_tokens=300)
             
             if api_result:
                 return api_result
@@ -308,8 +308,8 @@ class PDFReportGenerator:
             Focus only on the most critical actions. Be very brief.
             """
             
-            # Call Perplexity API
-            api_result = self.call_perplexity_api(prompt, max_tokens=250)
+            # Call OpenAI API
+            api_result = self.call_openai_api(prompt, max_tokens=250)
             
             if api_result:
                 return api_result
@@ -527,8 +527,8 @@ class PDFReportGenerator:
         story.append(Paragraph("Executive Summary", self.styles['ExecutiveSubtitle']))
         story.append(Spacer(1, 15))
         
-        # Generate Executive Summary using Perplexity API
-        print("🤖 Generating Executive Summary with Perplexity API...")
+        # Generate Executive Summary using OpenAI GPT API
+        print("🤖 Generating Executive Summary with OpenAI GPT API...")
         executive_summary_text = self.generate_executive_summary_with_api(data)
         
         # Add the API-generated summary
