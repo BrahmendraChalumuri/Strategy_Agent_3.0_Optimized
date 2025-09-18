@@ -143,7 +143,7 @@ asyncio.run(main())
 ### 2. AI-Powered Analysis
 - Generates vector embeddings for all products using sentence transformers
 - Caches embeddings for fast similarity calculations
-- Uses OpenAI GPT-4 to validate ingredient compatibility between products
+- Uses Perplexity AI to validate ingredient compatibility between products
 
 ### 3. Recommendation Generation
 - Analyzes customer catalogue items and their ingredients
